@@ -53,6 +53,7 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.compose.jetbrains.expui.theme)
         }
     }
 }
@@ -96,6 +97,8 @@ compose.desktop {
         mainClass = "MainKt"
 
         nativeDistributions {
+            modules("jdk.unsupported")
+
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ru.dezerom.otvechaylo"
             packageVersion = "1.0.0"
