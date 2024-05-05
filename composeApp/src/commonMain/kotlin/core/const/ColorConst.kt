@@ -6,11 +6,17 @@ object ColorConst {
     object Background {
         val PRIMARY = mineShaft
         val SECONDARY = darkMineShaft
+        val WHITE = Color.White
     }
 
     object Text {
         val PRIMARY = Color.White
         val SECONDARY = gray
+        val DARK = darkMineShaft
+    }
+
+    object Colors {
+        val ACCENT = piper
     }
 }
 
