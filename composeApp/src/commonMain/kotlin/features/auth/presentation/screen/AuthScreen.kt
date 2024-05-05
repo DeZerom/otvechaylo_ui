@@ -2,6 +2,7 @@ package features.auth.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.*
@@ -26,51 +27,55 @@ fun AuthScreen() {
     var value by remember { mutableStateOf("") }
     var passValue by remember { mutableStateOf("") }
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
+    Scaffold(
+        backgroundColor = ColorConst.Background.PRIMARY
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .padding(horizontal = SizeConst.Padding.M)
-                .fillMaxHeight()
-                .onSizeChanged {  }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(Res.drawable.app_icon),
-                contentDescription = null,
-                modifier = Modifier.size(SizeConst.IconSize.XXXL)
-            )
-            VerticalSpacer(SizeConst.Padding.XL)
-            Text(
-                text = stringResource(Res.string.authorization),
-                style = TextConst.BTitle
-            )
-            Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
-            DefaultTextField(
-                value = value,
-                onValueChange = { value = it },
-                labelText = stringResource(Res.string.login),
-            )
-            VerticalSpacer(SizeConst.Padding.M)
-            PasswordTextField(
-                value = passValue,
-                onValueChanged = { passValue = it }
-            )
-            VerticalSpacer(SizeConst.Padding.S)
-            Text(
-                text = stringResource(Res.string.create_account),
-                style = TextConst.ST.copy(color = ColorConst.Text.SECONDARY),
-                modifier = Modifier.align(Alignment.Start)
-            )
-            VerticalSpacer(SizeConst.Padding.XL)
-            WhiteButton(
-                onClick = {},
-                text = stringResource(Res.string.enter),
-                modifier = Modifier.width(TextFieldDefaults.MinWidth)
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(horizontal = SizeConst.Padding.M)
+                    .fillMaxHeight()
+                    .onSizeChanged {  }
+            ) {
+                Image(
+                    painter = painterResource(Res.drawable.app_icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(SizeConst.IconSize.XXXL)
+                )
+                VerticalSpacer(SizeConst.Padding.XL)
+                Text(
+                    text = stringResource(Res.string.authorization),
+                    style = TextConst.BTitle
+                )
+                Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
+                DefaultTextField(
+                    value = value,
+                    onValueChange = { value = it },
+                    labelText = stringResource(Res.string.login),
+                )
+                VerticalSpacer(SizeConst.Padding.M)
+                PasswordTextField(
+                    value = passValue,
+                    onValueChanged = { passValue = it }
+                )
+                VerticalSpacer(SizeConst.Padding.S)
+                Text(
+                    text = stringResource(Res.string.create_account),
+                    style = TextConst.ST.copy(color = ColorConst.Text.SECONDARY),
+                    modifier = Modifier.align(Alignment.Start)
+                )
+                VerticalSpacer(SizeConst.Padding.XL)
+                WhiteButton(
+                    onClick = {},
+                    text = stringResource(Res.string.enter),
+                    modifier = Modifier.width(TextFieldDefaults.MinWidth)
+                )
+            }
         }
     }
 }

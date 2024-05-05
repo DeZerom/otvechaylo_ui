@@ -16,6 +16,7 @@ compose-plugin = "1.6.2"
 composeJetbrainsExpuiTheme = "2.0.0"
 junit = "4.13.2"
 kotlin = "1.9.23"
+odysseyCore = "1.3.60"
 
 [libraries]
 compose-jetbrains-expui-theme = { module = "com.bybutter.compose:compose-jetbrains-expui-theme", version.ref = "composeJetbrainsExpuiTheme" }
@@ -32,6 +33,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+odyssey-compose = { module = "io.github.alexgladkov:odyssey-compose", version.ref = "odysseyCore" }
+odyssey-core = { module = "io.github.alexgladkov:odyssey-core", version.ref = "odysseyCore" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

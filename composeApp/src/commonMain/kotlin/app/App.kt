@@ -1,23 +1,23 @@
 package app
 
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
-import core.const.ColorConst
-import features.auth.presentation.screen.AuthScreen
+import app.navigation.buildGraph
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ru.alexgladkov.odyssey.compose.setup.OdysseyConfiguration
+import ru.alexgladkov.odyssey.compose.setup.setNavigationContent
 
 @Composable
 @Preview
-fun App() {
+fun App(
+    odysseyConfiguration: OdysseyConfiguration
+) {
     MaterialTheme(
         colors = darkColors()
     ) {
-        Scaffold(
-            backgroundColor = ColorConst.Background.PRIMARY
-        ) {
-            AuthScreen()
+        setNavigationContent(odysseyConfiguration) {
+            buildGraph()
         }
     }
 }
