@@ -8,7 +8,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onSizeChanged
 import core.const.ColorConst
 import core.const.SizeConst
 import core.const.TextConst
@@ -40,7 +39,6 @@ fun AuthScreen() {
                 modifier = Modifier
                     .padding(horizontal = SizeConst.Padding.M)
                     .fillMaxHeight()
-                    .onSizeChanged {  }
             ) {
                 Image(
                     painter = painterResource(Res.drawable.app_icon),
@@ -73,7 +71,7 @@ fun AuthScreen() {
                 WhiteButton(
                     onClick = {},
                     text = stringResource(Res.string.enter),
-                    modifier = Modifier.width(TextFieldDefaults.MinWidth)
+                    modifier = Modifier.width(TextFieldDefaults.MinWidth),
                 )
             }
         }

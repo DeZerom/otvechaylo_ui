@@ -17,6 +17,9 @@ object SizeConst {
     }
 
     object Elements {
-        val TEXT_FIELD_HEIGHT = 38.dp
+        val DEFAULT_BUTTON_HEIGHT = 48.dp
+
+        val BUTTON_PROGRESS_SIZE = 32.dp
+        val BUTTON_PROGRESS_THICKNESS = 2.dp
     }
 }
