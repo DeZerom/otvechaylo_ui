@@ -3,21 +3,25 @@ package app
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
-import app.navigation.buildGraph
+import app.navigation.AuthNavComponent
+import com.arkivanov.decompose.extensions.compose.stack.Children
+import features.auth.presentation.screen.AuthScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ru.alexgladkov.odyssey.compose.setup.OdysseyConfiguration
-import ru.alexgladkov.odyssey.compose.setup.setNavigationContent
 
 @Composable
 @Preview
 fun App(
-    odysseyConfiguration: OdysseyConfiguration
+    authNavComponent: AuthNavComponent
 ) {
     MaterialTheme(
         colors = darkColors()
     ) {
-        setNavigationContent(odysseyConfiguration) {
-            buildGraph()
+        Children(
+            stack = authNavComponent.childStack,
+        ) {
+            when (val child = it.instance) {
+                is AuthNavComponent.Child.Auth -> AuthScreen(child.component)
+            }
         }
     }
 }

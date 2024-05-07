@@ -17,6 +17,7 @@ fun DefaultTextField(
     value: String,
     onValueChange: (String) -> Unit,
     labelText: String,
+    placeholderText: String = "",
     isSingleLine: Boolean = true,
     visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
@@ -41,7 +42,7 @@ fun DefaultTextField(
         },
         placeholder = {
             Text(
-                text = "ASd",
+                text = placeholderText,
                 style = TextConst.MT.copy(color = ColorConst.Text.SECONDARY)
             )
         },

@@ -5,7 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import core.const.ColorConst
@@ -15,6 +16,7 @@ import core.widgets.buttons.WhiteButton
 import core.widgets.spacings.VerticalSpacer
 import core.widgets.text_field.DefaultTextField
 import core.widgets.text_field.PasswordTextField
+import features.auth.presentation.component.auth.AuthComponent
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -22,10 +24,9 @@ import otvechayloui.composeapp.generated.resources.*
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun AuthScreen() {
-    var value by remember { mutableStateOf("") }
-    var passValue by remember { mutableStateOf("") }
-
+fun AuthScreen(
+    component: AuthComponent
+) {
     Scaffold(
         backgroundColor = ColorConst.Background.PRIMARY
     ) {
@@ -52,14 +53,14 @@ fun AuthScreen() {
                 )
                 Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
                 DefaultTextField(
-                    value = value,
-                    onValueChange = { value = it },
+                    value = component.loginComponent.login.collectAsState().value,
+                    onValueChange = component.loginComponent::onChanged,
                     labelText = stringResource(Res.string.login),
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
-                    value = passValue,
-                    onValueChanged = { passValue = it }
+                    value = component.passwordComponent.password.collectAsState().value,
+                    onValueChanged = component.passwordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.S)
                 Text(
