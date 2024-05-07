@@ -42,6 +42,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.decompose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -52,6 +53,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.odyssey.core)
             implementation(libs.odyssey.compose)
+            implementation(libs.decompose)
+            implementation(libs.decompose.extensions.compose)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

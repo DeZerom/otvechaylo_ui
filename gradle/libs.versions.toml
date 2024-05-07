@@ -17,6 +17,7 @@ composeJetbrainsExpuiTheme = "2.0.0"
 junit = "4.13.2"
 kotlin = "1.9.23"
 odysseyCore = "1.3.60"
+decompose = "3.0.0"
 
 [libraries]
 compose-jetbrains-expui-theme = { module = "com.bybutter.compose:compose-jetbrains-expui-theme", version.ref = "composeJetbrainsExpuiTheme" }
@@ -35,9 +36,12 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 odyssey-compose = { module = "io.github.alexgladkov:odyssey-compose", version.ref = "odysseyCore" }
 odyssey-core = { module = "io.github.alexgladkov:odyssey-core", version.ref = "odysseyCore" }
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-extensions-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
