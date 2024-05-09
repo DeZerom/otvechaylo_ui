@@ -53,18 +53,18 @@ fun RegistrationScreen(
                 )
                 Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
                 DefaultTextField(
-                    value = component.loginComponent.login.collectAsState().value,
+                    value = component.loginComponent.value.collectAsState().value,
                     onValueChange = component.loginComponent::onChanged,
                     labelText = stringResource(Res.string.login),
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
-                    value = component.passwordComponent.password.collectAsState().value,
+                    value = component.passwordComponent.value.collectAsState().value,
                     onValueChanged = component.passwordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
-                    value = component.repeatPasswordComponent.password.collectAsState().value,
+                    value = component.repeatPasswordComponent.value.collectAsState().value,
                     onValueChanged = component.repeatPasswordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.XL)

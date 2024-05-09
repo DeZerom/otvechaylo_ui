@@ -3,6 +3,7 @@ package core.components
 import androidx.compose.ui.graphics.Color
 import core.const.ColorConst
 import core.utils.text_res.TextResource
+import core.utils.text_res.TextResource.Companion.TextResource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -16,6 +17,11 @@ class SnackBarComponent {
 
     fun showError(res: TextResource) {
         _snackBar.value = Type.Error(message = res)
+    }
+
+    fun showError(string: String?) {
+        string ?: return
+        showError(TextResource(string))
     }
 
     sealed class Type {

@@ -1,23 +1,29 @@
 package core.utils.network
 
-import core.utils.text_res.TextResource.Companion.TextResource
 import io.ktor.client.call.*
 import io.ktor.client.statement.*
+import io.ktor.serialization.*
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.getString
+import otvechayloui.composeapp.generated.resources.Res
+import otvechayloui.composeapp.generated.resources.unknown_error
 
 @OptIn(ExperimentalResourceApi::class)
+@Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
 suspend inline fun <reified T> safeApiCall(
     call: () -> HttpResponse
 ): Result<T> {
     return try {
-        val body = call().body<Any>()
+        val resp = call()
 
-        if (body is T) {
-            Result.success(body)
-        } else {
-            Result.failure(BackErrorThrowable(TextResource((body as ErrorDto).error)))
+        try {
+            Result.success(resp.body())
+        } catch (e: JsonConvertException) {
+            val error = resp.body<ErrorDto>()
+            Result.failure(BackErrorThrowable(message = error.error))
         }
     } catch (e: Exception) {
-        Result.failure(BackErrorThrowable.unknown())
+        print(e)
+        Result.failure(RuntimeException(getString(Res.string.unknown_error), e))
     }
 }

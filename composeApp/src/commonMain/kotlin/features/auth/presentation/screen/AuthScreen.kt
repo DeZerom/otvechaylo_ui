@@ -56,13 +56,13 @@ fun AuthScreen(
                 )
                 Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
                 DefaultTextField(
-                    value = component.loginComponent.login.collectAsState().value,
+                    value = component.loginComponent.value.collectAsState().value,
                     onValueChange = component.loginComponent::onChanged,
                     labelText = stringResource(Res.string.login),
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
-                    value = component.passwordComponent.password.collectAsState().value,
+                    value = component.passwordComponent.value.collectAsState().value,
                     onValueChanged = component.passwordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.S)
@@ -77,6 +77,7 @@ fun AuthScreen(
                 WhiteButton(
                     onClick = component::authorize,
                     text = stringResource(Res.string.enter),
+                    isLoading = component.state.collectAsState().value.isLoading,
                     modifier = Modifier.width(TextFieldDefaults.MinWidth),
                 )
             }

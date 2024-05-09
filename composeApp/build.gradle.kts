@@ -48,6 +48,7 @@ kotlin {
 
             // di
             implementation(libs.koin.core)
+            implementation(libs.koin.compose)
 
             // network
             implementation(libs.ktor.client.core)
@@ -57,6 +58,9 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.compose.jetbrains.expui.theme)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.slf4j.api)
+            implementation(libs.slf4j.logger)
         }
     }
 }

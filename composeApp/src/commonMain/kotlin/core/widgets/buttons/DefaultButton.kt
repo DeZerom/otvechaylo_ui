@@ -7,6 +7,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import core.const.ShapeConst
@@ -22,7 +23,10 @@ fun DefaultButton(
     isLoading: Boolean,
     modifier: Modifier = Modifier
 ) = Button(
-    onClick = onClick,
+    onClick = remember(isLoading) {
+        if (isLoading) { { Unit } }
+        else onClick
+    },
     shape = ShapeConst.DEFAULT_SHAPE,
     colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
     modifier = Modifier
