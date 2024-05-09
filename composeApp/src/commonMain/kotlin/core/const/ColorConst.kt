@@ -9,6 +9,11 @@ object ColorConst {
         val WHITE = Color.White
     }
 
+    object SnackBarBg {
+        val SUCCESS = forestGreen
+        val ERROR = oldBrick
+    }
+
     object Text {
         val PRIMARY = Color.White
         val SECONDARY = gray
@@ -26,4 +31,4 @@ private val piper = Color(0xFFC25120)
 private val gray = Color(0xFF838383)
 private val forestGreen = Color(0xFF3A8F2C)
 private val easternBlue = Color(0xFF1993AE)
-private val oldBrick = Color(0x8A1C1C)
+private val oldBrick = Color(0xFF8A1C1C)

@@ -3,7 +3,6 @@ package features.auth.presentation.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -14,6 +13,7 @@ import core.const.ColorConst
 import core.const.SizeConst
 import core.const.TextConst
 import core.widgets.buttons.WhiteButton
+import core.widgets.snack_bar_handler.SnackBarHandlerScaffold
 import core.widgets.spacings.VerticalSpacer
 import core.widgets.text_field.DefaultTextField
 import core.widgets.text_field.PasswordTextField
@@ -28,12 +28,14 @@ import otvechayloui.composeapp.generated.resources.*
 fun AuthScreen(
     component: AuthComponent
 ) {
-    Scaffold(
-        backgroundColor = ColorConst.Background.PRIMARY
-    ) {
+    SnackBarHandlerScaffold(
+        snackBarComponent = component.snackBarComponent
+    ) { paddingValues ->
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -73,7 +75,7 @@ fun AuthScreen(
                 )
                 VerticalSpacer(SizeConst.Padding.XL)
                 WhiteButton(
-                    onClick = {},
+                    onClick = component::authorize,
                     text = stringResource(Res.string.enter),
                     modifier = Modifier.width(TextFieldDefaults.MinWidth),
                 )

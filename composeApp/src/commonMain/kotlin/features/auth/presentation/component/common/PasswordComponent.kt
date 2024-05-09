@@ -1,9 +1,12 @@
 package features.auth.presentation.component.common
 
+import core.utils.text_validators.TextValidator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class PasswordComponent {
+class PasswordComponent(
+    private val validator: TextValidator
+) {
     private val _password = MutableStateFlow("")
     val password = _password.asStateFlow()
 
@@ -11,5 +14,5 @@ class PasswordComponent {
         _password.value = newValue
     }
 
-    fun validate() = password.value.length > 3
+    fun validate() = validator.validate(password.value)
 }
