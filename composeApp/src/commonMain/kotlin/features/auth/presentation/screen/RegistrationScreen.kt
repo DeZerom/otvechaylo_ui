@@ -1,7 +1,6 @@
 package features.auth.presentation.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -17,7 +16,7 @@ import core.widgets.buttons.WhiteButton
 import core.widgets.spacings.VerticalSpacer
 import core.widgets.text_field.DefaultTextField
 import core.widgets.text_field.PasswordTextField
-import features.auth.presentation.component.AuthComponent
+import features.auth.presentation.component.RegistrationComponent
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -25,8 +24,8 @@ import otvechayloui.composeapp.generated.resources.*
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun AuthScreen(
-    component: AuthComponent
+fun RegistrationScreen(
+    component: RegistrationComponent
 ) {
     Scaffold(
         backgroundColor = ColorConst.Background.PRIMARY
@@ -63,13 +62,10 @@ fun AuthScreen(
                     value = component.passwordComponent.password.collectAsState().value,
                     onValueChanged = component.passwordComponent::onChanged
                 )
-                VerticalSpacer(SizeConst.Padding.S)
-                Text(
-                    text = stringResource(Res.string.create_account),
-                    style = TextConst.ST.copy(color = ColorConst.Text.SECONDARY),
-                    modifier = Modifier
-                        .align(Alignment.Start)
-                        .clickable(onClick = component.navigateToRegistration)
+                VerticalSpacer(SizeConst.Padding.M)
+                PasswordTextField(
+                    value = component.repeatPasswordComponent.password.collectAsState().value,
+                    onValueChanged = component.repeatPasswordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.XL)
                 WhiteButton(

@@ -4,8 +4,10 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
-import features.auth.presentation.component.auth.AuthComponent
+import features.auth.presentation.component.AuthComponent
+import features.auth.presentation.component.RegistrationComponent
 import kotlinx.serialization.Serializable
 
 class AuthNavComponentImpl(
@@ -27,7 +29,14 @@ class AuthNavComponentImpl(
         componentContext: ComponentContext,
     ) = when (config) {
         ChildConfig.Auth -> AuthNavComponent.Child.Auth(
-            AuthComponent(componentContext)
+            AuthComponent(
+                componentContext = componentContext,
+                navigateToRegistration = { navigation.push(ChildConfig.Registration) }
+            )
+        )
+
+        ChildConfig.Registration -> AuthNavComponent.Child.Registration(
+            RegistrationComponent(componentContext)
         )
     }
 
@@ -35,5 +44,8 @@ class AuthNavComponentImpl(
     private sealed interface ChildConfig {
         @Serializable
         data object Auth: ChildConfig
+
+        @Serializable
+        data object Registration: ChildConfig
     }
 }
