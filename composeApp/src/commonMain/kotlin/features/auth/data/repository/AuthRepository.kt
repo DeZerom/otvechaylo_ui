@@ -36,4 +36,11 @@ class AuthRepository(
         return !settingsSource.getToken().isNullOrBlank()
     }
 
+    suspend fun register(
+        login: String,
+        password: String
+    ): Result<Boolean> {
+        return networkSource.register(login, password).map { it.result }
+    }
+
 }

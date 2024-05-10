@@ -13,4 +13,9 @@ class AuthUseCase(private val authRepository: AuthRepository) {
 
     fun isAuthorized() = authRepository.checkToken()
 
+    suspend fun register(
+        login: String,
+        password: String
+    ) = authRepository.register(login, password)
+
 }

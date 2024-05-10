@@ -15,6 +15,11 @@ class SnackBarComponent {
         _snackBar.value = Type.Success(message = res)
     }
 
+    fun showSuccess(string: String?) {
+        string ?: return
+        showSuccess(TextResource(string))
+    }
+
     fun showError(res: TextResource) {
         _snackBar.value = Type.Error(message = res)
     }

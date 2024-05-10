@@ -7,11 +7,13 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import core.const.ColorConst
 import core.const.SizeConst
 import core.const.TextConst
+import core.utils.extension.collectAsState
 import core.widgets.buttons.WhiteButton
 import core.widgets.snack_bar_handler.SnackBarHandlerScaffold
 import core.widgets.spacings.VerticalSpacer
@@ -28,6 +30,8 @@ import otvechayloui.composeapp.generated.resources.*
 fun AuthScreen(
     component: AuthComponent
 ) {
+    val state by component.stateComponent.collectAsState()
+
     SnackBarHandlerScaffold(
         snackBarComponent = component.snackBarComponent
     ) { paddingValues ->
@@ -77,7 +81,7 @@ fun AuthScreen(
                 WhiteButton(
                     onClick = component::authorize,
                     text = stringResource(Res.string.enter),
-                    isLoading = component.state.collectAsState().value.isLoading,
+                    isLoading = component.stateComponent.collectAsState().value.isLoading,
                     modifier = Modifier.width(TextFieldDefaults.MinWidth),
                 )
             }

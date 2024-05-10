@@ -4,6 +4,7 @@
 
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="fill_fields">Заполните обязательные поля</string>
+    <string name= "passwords_must_match">Пароли должны совпадать</string>
 
     <string name="authorization">Авторизация</string>
     <string name="login">Логин</string>

@@ -6,7 +6,7 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
-open class BaseScreenComponent(
+open class BaseCoroutineComponent(
     componentContext: ComponentContext
 ) : ComponentContext by componentContext {
     private val scopeKeeperInstance = componentContext.instanceKeeper.getOrCreate {

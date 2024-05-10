@@ -1,5 +1,6 @@
 package features.auth.data.network
 
+import core.dto.BooleanResultDto
 import core.utils.network.makePost
 import features.auth.data.model.AuthResponseDto
 import features.auth.data.model.CredentialsDto
@@ -17,4 +18,13 @@ class AuthNetworkSource(private val client: HttpClient) {
         )
     }
 
+    suspend fun register(
+        login: String,
+        password: String
+    ): Result<BooleanResultDto> {
+        return client.makePost(
+            url = "/register",
+            body = CredentialsDto(login, password)
+        )
+    }
 }

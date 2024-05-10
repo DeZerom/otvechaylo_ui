@@ -2,17 +2,18 @@ package features.auth.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import core.const.ColorConst
 import core.const.SizeConst
 import core.const.TextConst
+import core.utils.extension.collectAsState
+import core.utils.extension.collectTextAsState
 import core.widgets.buttons.WhiteButton
+import core.widgets.snack_bar_handler.SnackBarHandlerScaffold
 import core.widgets.spacings.VerticalSpacer
 import core.widgets.text_field.DefaultTextField
 import core.widgets.text_field.PasswordTextField
@@ -27,8 +28,10 @@ import otvechayloui.composeapp.generated.resources.*
 fun RegistrationScreen(
     component: RegistrationComponent
 ) {
-    Scaffold(
-        backgroundColor = ColorConst.Background.PRIMARY
+    val state by component.stateComponent.collectAsState()
+
+    SnackBarHandlerScaffold(
+        snackBarComponent = component.snackBarComponent
     ) {
         Box(
             contentAlignment = Alignment.Center,
@@ -53,24 +56,25 @@ fun RegistrationScreen(
                 )
                 Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
                 DefaultTextField(
-                    value = component.loginComponent.value.collectAsState().value,
+                    value = component.loginComponent.collectTextAsState().value,
                     onValueChange = component.loginComponent::onChanged,
                     labelText = stringResource(Res.string.login),
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
-                    value = component.passwordComponent.value.collectAsState().value,
+                    value = component.passwordComponent.collectTextAsState().value,
                     onValueChanged = component.passwordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
-                    value = component.repeatPasswordComponent.value.collectAsState().value,
+                    value = component.repeatPasswordComponent.collectTextAsState().value,
                     onValueChanged = component.repeatPasswordComponent::onChanged
                 )
                 VerticalSpacer(SizeConst.Padding.XL)
                 WhiteButton(
-                    onClick = {},
+                    onClick = component::register,
                     text = stringResource(Res.string.enter),
+                    isLoading = state.isLoading,
                     modifier = Modifier.width(TextFieldDefaults.MinWidth),
                 )
             }
