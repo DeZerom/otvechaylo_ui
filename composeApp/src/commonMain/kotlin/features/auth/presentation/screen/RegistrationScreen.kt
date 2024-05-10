@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import core.const.SizeConst
@@ -29,6 +30,7 @@ fun RegistrationScreen(
     component: RegistrationComponent
 ) {
     val state by component.stateComponent.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     SnackBarHandlerScaffold(
         snackBarComponent = component.snackBarComponent

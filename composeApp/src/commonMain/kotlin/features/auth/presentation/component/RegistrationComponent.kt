@@ -5,11 +5,15 @@ import core.components.BaseCoroutineComponent
 import core.components.SnackBarComponent
 import core.components.StateComponent
 import core.components.TextInputComponent
+import core.utils.text_res.TextResource.Companion.TextResource
 import core.utils.text_validators.AlwaysValidValidator
 import core.utils.text_validators.LengthValidator
 import features.auth.domain.use_case.AuthUseCase
 import features.auth.presentation.model.RegistrationScreenState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
 import org.koin.core.component.KoinComponent
@@ -17,9 +21,11 @@ import org.koin.core.component.inject
 import otvechayloui.composeapp.generated.resources.Res
 import otvechayloui.composeapp.generated.resources.fill_fields
 import otvechayloui.composeapp.generated.resources.passwords_must_match
+import otvechayloui.composeapp.generated.resources.successful_registration
 
 class RegistrationComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val onRegister: () -> Unit
 ): BaseCoroutineComponent(componentContext), KoinComponent {
     val loginComponent = TextInputComponent(AlwaysValidValidator())
     val passwordComponent = TextInputComponent(LengthValidator(3))
@@ -47,7 +53,11 @@ class RegistrationComponent(
             login = loginComponent.value.value,
             password = passwordComponent.value.value
         ).fold(
-            onSuccess = { snackBarComponent.showSuccess("qwe") },
+            onSuccess = {
+                snackBarComponent.showSuccess(TextResource(Res.string.successful_registration))
+                delay(1500L)
+                withContext(Dispatchers.Main) { onRegister() }
+            },
             onFailure = { snackBarComponent.showError(it.message) }
         )
 

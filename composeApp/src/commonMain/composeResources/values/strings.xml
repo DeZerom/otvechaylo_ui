@@ -11,4 +11,9 @@
     <string name="password">Пароль</string>
     <string name="create_account">Создать аккаунт</string>
     <string name="enter">Войти</string>
+    <string name="successful_authorization">Успешная авторизация</string>
+
+    <string name="registration">Регистрация</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="successful_registration">Успешная регистрация</string>
 </resources>

@@ -33,6 +33,9 @@ kotlin {
 
             // network
             implementation(libs.ktor.client.okhttp)
+
+            // async
+            implementation(libs.kotlin.coroutines.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -57,6 +60,9 @@ kotlin {
 
             // persistence
             implementation(libs.multiplatform.setting)
+
+            // async
+            implementation(libs.kotlin.coroutines.core)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -64,6 +70,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.slf4j.api)
             implementation(libs.slf4j.logger)
+            implementation(libs.kotlin.coroutines.swing)
         }
     }
 }

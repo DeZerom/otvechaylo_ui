@@ -1,10 +1,7 @@
 package app.navigation
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import features.auth.presentation.component.AuthComponent
 import features.auth.presentation.component.RegistrationComponent
@@ -36,7 +33,10 @@ class AuthNavComponentImpl(
         )
 
         ChildConfig.Registration -> AuthNavComponent.Child.Registration(
-            RegistrationComponent(componentContext)
+            RegistrationComponent(
+                componentContext = componentContext,
+                onRegister = { navigation.pop() }
+            )
         )
     }
 
