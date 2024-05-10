@@ -22,6 +22,7 @@ koin = "3.2.0"
 koin-compose = "1.0.4"
 ktor = "2.3.10"
 slf4j = "2.0.13"
+settings = "1.1.1"
 
 [libraries]
 compose-jetbrains-expui-theme = { module = "com.bybutter.compose:compose-jetbrains-expui-theme", version.ref = "composeJetbrainsExpuiTheme" }
@@ -52,6 +53,7 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 slf4j-logger = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
+multiplatform-setting = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
 
 
 [plugins]

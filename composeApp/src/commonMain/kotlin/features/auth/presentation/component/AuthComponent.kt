@@ -20,7 +20,7 @@ import otvechayloui.composeapp.generated.resources.fill_fields
 
 @OptIn(ExperimentalResourceApi::class)
 class AuthComponent(
-    private val componentContext: ComponentContext,
+    componentContext: ComponentContext,
     val navigateToRegistration: () -> Unit,
 ): BaseScreenComponent(componentContext), KoinComponent {
 
@@ -32,6 +32,10 @@ class AuthComponent(
     val state = _state.asStateFlow()
 
     private val authUseCase: AuthUseCase by inject()
+
+    init {
+        checkAuthorization()
+    }
 
     fun authorize() = componentScope.launch {
         if (!validate()) {
@@ -54,4 +58,10 @@ class AuthComponent(
 
     private fun validate() = loginComponent.validate()
             && passwordComponent.validate()
+
+    private fun checkAuthorization() {
+        if (authUseCase.isAuthorized()) {
+            snackBarComponent.showSuccess(TextResource("qwe"))
+        }
+    }
 }

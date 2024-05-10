@@ -24,12 +24,12 @@ import utils.runOnUiThread
 fun main() {
     val lifecycle = LifecycleRegistry()
 
-    val root = runOnUiThread {
-        AuthNavComponentImpl(DefaultComponentContext(lifecycle = lifecycle))
-    }
-
     startKoin {
         modules(appModule(), authDiModule)
+    }
+
+    val root = runOnUiThread {
+        AuthNavComponentImpl(DefaultComponentContext(lifecycle = lifecycle))
     }
 
     application {

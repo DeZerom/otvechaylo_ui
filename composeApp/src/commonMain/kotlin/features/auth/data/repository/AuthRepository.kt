@@ -1,14 +1,39 @@
 package features.auth.data.repository
 
 import features.auth.data.network.AuthNetworkSource
+import features.auth.data.persistence.AuthSettingsSource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.getString
+import otvechayloui.composeapp.generated.resources.Res
+import otvechayloui.composeapp.generated.resources.unknown_error
 
-class AuthRepository(private val source: AuthNetworkSource) {
+class AuthRepository(
+    private val networkSource: AuthNetworkSource,
+    private val settingsSource: AuthSettingsSource
+) {
 
+    @OptIn(ExperimentalResourceApi::class)
     suspend fun authorize(
         login: String,
         password: String
-    ): Result<String> {
-        return source.authorize(login, password).map { it.token ?: "" }
+    ): Result<Boolean> {
+        val token = settingsSource.getToken()
+        if (token != null) {
+            return Result.success(true)
+        }
+
+        val networkToken = networkSource.authorize(login, password).fold(
+            onSuccess = { it.token ?: return Result.failure(UnknownError(getString(Res.string.unknown_error))) },
+            onFailure = { return Result.failure(it) }
+        )
+
+        settingsSource.saveToken(networkToken)
+
+        return Result.success(true)
+    }
+
+    fun checkToken(): Boolean {
+        return !settingsSource.getToken().isNullOrBlank()
     }
 
 }

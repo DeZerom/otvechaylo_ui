@@ -24,7 +24,7 @@ fun DefaultButton(
     modifier: Modifier = Modifier
 ) = Button(
     onClick = remember(isLoading) {
-        if (isLoading) { { Unit } }
+        if (isLoading) { {} }
         else onClick
     },
     shape = ShapeConst.DEFAULT_SHAPE,

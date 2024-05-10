@@ -8,7 +8,9 @@ class AuthUseCase(private val authRepository: AuthRepository) {
         login: String,
         password: String
     ): Result<Boolean> {
-        return authRepository.authorize(login, password).map { it.isNotBlank() }
+        return authRepository.authorize(login, password)
     }
+
+    fun isAuthorized() = authRepository.checkToken()
 
 }
