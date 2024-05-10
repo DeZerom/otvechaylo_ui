@@ -6,7 +6,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import core.const.SizeConst
@@ -30,7 +29,6 @@ fun RegistrationScreen(
     component: RegistrationComponent
 ) {
     val state by component.stateComponent.collectAsState()
-    val coroutineScope = rememberCoroutineScope()
 
     SnackBarHandlerScaffold(
         snackBarComponent = component.snackBarComponent
@@ -53,7 +51,7 @@ fun RegistrationScreen(
                 )
                 VerticalSpacer(SizeConst.Padding.XL)
                 Text(
-                    text = stringResource(Res.string.authorization),
+                    text = stringResource(Res.string.registration),
                     style = TextConst.BTitle
                 )
                 Spacer(modifier = Modifier.height(SizeConst.Padding.XXL))
@@ -70,12 +68,13 @@ fun RegistrationScreen(
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
                     value = component.repeatPasswordComponent.collectTextAsState().value,
-                    onValueChanged = component.repeatPasswordComponent::onChanged
+                    onValueChanged = component.repeatPasswordComponent::onChanged,
+                    labelText = stringResource(Res.string.repeat_password)
                 )
                 VerticalSpacer(SizeConst.Padding.XL)
                 WhiteButton(
                     onClick = component::register,
-                    text = stringResource(Res.string.enter),
+                    text = stringResource(Res.string.register),
                     isLoading = state.isLoading,
                     modifier = Modifier.width(TextFieldDefaults.MinWidth),
                 )

@@ -16,4 +16,5 @@
     <string name="registration">Регистрация</string>
     <string name="register">Зарегистрироваться</string>
     <string name="successful_registration">Успешная регистрация</string>
+    <string name="repeat_password">Повторите пароль</string>
 </resources>
