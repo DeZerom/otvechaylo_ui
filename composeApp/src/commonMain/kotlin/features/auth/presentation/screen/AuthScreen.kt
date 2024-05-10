@@ -69,7 +69,7 @@ fun AuthScreen(
                     value = component.passwordComponent.value.collectAsState().value,
                     onValueChanged = component.passwordComponent::onChanged
                 )
-                VerticalSpacer(SizeConst.Padding.S)
+                VerticalSpacer(SizeConst.Padding.XS)
                 Text(
                     text = stringResource(Res.string.create_account),
                     style = TextConst.ST.copy(color = ColorConst.Text.SECONDARY),

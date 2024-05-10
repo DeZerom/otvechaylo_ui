@@ -1,4 +1,4 @@
-package features.auth.data.network
+package features.auth.data.sources
 
 import core.dto.BooleanResultDto
 import core.utils.network.makePost

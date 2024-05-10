@@ -10,7 +10,9 @@ import core.utils.text_validators.AlwaysValidValidator
 import core.utils.text_validators.LengthValidator
 import features.auth.domain.use_case.AuthUseCase
 import features.auth.presentation.model.AuthScreenState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,6 +23,7 @@ import otvechayloui.composeapp.generated.resources.fill_fields
 class AuthComponent(
     componentContext: ComponentContext,
     val navigateToRegistration: () -> Unit,
+    val onAuthorized: () -> Unit
 ): BaseCoroutineComponent(componentContext), KoinComponent {
 
     val loginComponent = TextInputComponent(AlwaysValidValidator())
@@ -46,7 +49,7 @@ class AuthComponent(
             login = loginComponent.value.value,
             password = passwordComponent.value.value
         ).fold(
-            onSuccess = { snackBarComponent.showSuccess(TextResource("qwe")) },
+            onSuccess = { withContext(Dispatchers.Main) { onAuthorized() } },
             onFailure = { snackBarComponent.showError(it.message) }
         )
 
@@ -58,7 +61,7 @@ class AuthComponent(
 
     private fun checkAuthorization() {
         if (authUseCase.isAuthorized()) {
-            snackBarComponent.showSuccess(TextResource("qwe"))
+            onAuthorized()
         }
     }
 }

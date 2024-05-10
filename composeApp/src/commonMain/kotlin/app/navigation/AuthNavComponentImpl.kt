@@ -28,7 +28,8 @@ class AuthNavComponentImpl(
         ChildConfig.Auth -> AuthNavComponent.Child.Auth(
             AuthComponent(
                 componentContext = componentContext,
-                navigateToRegistration = { navigation.push(ChildConfig.Registration) }
+                navigateToRegistration = { navigation.push(ChildConfig.Registration) },
+                onAuthorized = { navigation.replaceCurrent(ChildConfig.Contexts) }
             )
         )
 
@@ -38,6 +39,8 @@ class AuthNavComponentImpl(
                 onRegister = { navigation.pop() }
             )
         )
+
+        ChildConfig.Contexts -> AuthNavComponent.Child.Contexts()
     }
 
     @Serializable
@@ -47,5 +50,8 @@ class AuthNavComponentImpl(
 
         @Serializable
         data object Registration: ChildConfig
+
+        @Serializable
+        data object Contexts: ChildConfig
     }
 }

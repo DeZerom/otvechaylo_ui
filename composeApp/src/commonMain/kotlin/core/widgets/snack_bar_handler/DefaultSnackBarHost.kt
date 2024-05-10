@@ -38,7 +38,7 @@ fun DefaultSnackBarHost(
                     modifier = Modifier.size(SizeConst.IconSize.L),
                     tint = Color.White
                 )
-                HorizontalSpacer(SizeConst.Padding.S)
+                HorizontalSpacer(SizeConst.Padding.XS)
                 Text(
                     text = type?.message?.getString() ?: "",
                     style = TextConst.MT

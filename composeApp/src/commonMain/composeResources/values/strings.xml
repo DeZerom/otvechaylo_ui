@@ -17,4 +17,10 @@
     <string name="register">Зарегистрироваться</string>
     <string name="successful_registration">Успешная регистрация</string>
     <string name="repeat_password">Повторите пароль</string>
+
+    <string name="contexts">Контексты</string>
+    <string name="cloud_source">В облаке</string>
+    <string name="local_source">Локально</string>
+    <string name="both_source">Локально и в облаке</string>
+    <string name="both_source_conflict">Локально и в облаке (есть различия)</string>
 </resources>

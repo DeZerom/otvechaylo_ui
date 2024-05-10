@@ -1,7 +1,7 @@
 package features.auth.data.repository
 
-import features.auth.data.network.AuthNetworkSource
-import features.auth.data.persistence.AuthSettingsSource
+import features.auth.data.sources.AuthNetworkSource
+import features.auth.data.sources.AuthSettingsSource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
 import otvechayloui.composeapp.generated.resources.Res

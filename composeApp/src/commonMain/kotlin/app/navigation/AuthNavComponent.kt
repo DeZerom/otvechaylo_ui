@@ -10,6 +10,9 @@ interface AuthNavComponent {
 
     sealed interface Child {
         class Auth(val component: AuthComponent): Child
+
         class Registration(val component: RegistrationComponent): Child
+
+        class Contexts(): Child
     }
 }

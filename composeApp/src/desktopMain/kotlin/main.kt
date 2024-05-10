@@ -8,7 +8,8 @@ import app.navigation.AuthNavComponentImpl
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import features.auth.data.di.authDiModule
+import features.auth.di.authDiModule
+import features.contexts.di.contextsDiModule
 import io.kanro.compose.jetbrains.expui.theme.DarkTheme
 import io.kanro.compose.jetbrains.expui.window.JBWindow
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -25,7 +26,7 @@ fun main() {
     val lifecycle = LifecycleRegistry()
 
     startKoin {
-        modules(appModule(), authDiModule)
+        modules(appModule(), authDiModule, contextsDiModule)
     }
 
     val root = runOnUiThread {
@@ -42,7 +43,8 @@ fun main() {
             title = stringResource(Res.string.app_name),
             icon = painterResource(Res.drawable.app_icon),
             theme = DarkTheme,
-            state = windowState
+            state = windowState,
+            resizable = false
         ) {
             App(root)
         }

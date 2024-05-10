@@ -12,3 +12,11 @@ suspend inline fun <reified B: Any?, reified R> HttpClient.makePost(
         if (body != null) setBody(body)
     }
 }
+
+suspend inline fun <reified R> HttpClient.makeGet(
+    url: String
+): Result<R> = safeApiCall {
+    get {
+        url(url)
+    }
+}

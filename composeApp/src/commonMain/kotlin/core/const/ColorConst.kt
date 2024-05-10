@@ -22,6 +22,8 @@ object ColorConst {
 
     object Colors {
         val ACCENT = piper
+        val BLUE = easternBlue
+        val GREEN = forestGreen
     }
 }
 

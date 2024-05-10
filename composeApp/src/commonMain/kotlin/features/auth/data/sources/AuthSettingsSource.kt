@@ -1,4 +1,4 @@
-package features.auth.data.persistence
+package features.auth.data.sources
 
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.get
