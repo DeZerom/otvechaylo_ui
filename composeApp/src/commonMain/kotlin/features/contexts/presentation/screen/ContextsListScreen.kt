@@ -1,11 +1,13 @@
 package features.contexts.presentation.screen
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import app.config.fillPlatformWidth
 import core.const.ColorConst
 import core.const.SizeConst
 import core.widgets.app_bar.TitleAppBar
@@ -22,7 +24,8 @@ import otvechayloui.composeapp.generated.resources.contexts
 fun ContextsListScreen() {
     Scaffold(
         backgroundColor = ColorConst.Background.PRIMARY,
-        topBar = { TitleAppBar(title = stringResource(Res.string.contexts)) }
+        topBar = { TitleAppBar(title = stringResource(Res.string.contexts)) },
+        modifier = Modifier.fillPlatformWidth()
     ) {
         LazyColumn(
             contentPadding = PaddingValues(SizeConst.Padding.M)
@@ -39,7 +42,9 @@ fun ContextsListScreen() {
                         source = ContextSource.NETWORK,
                         hasConflict = false
                     ),
-                    modifier = Modifier.padding(bottom = SizeConst.Padding.M)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = SizeConst.Padding.M)
                 )
             }
         }

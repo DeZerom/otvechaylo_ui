@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import core.components.SnackBarComponent
 import core.const.ColorConst
@@ -16,6 +17,7 @@ import core.utils.text_res.getStringSuspending
 fun SnackBarHandlerScaffold(
     snackBarComponent: SnackBarComponent,
     backgroundColor: Color = ColorConst.Background.PRIMARY,
+    modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit
 ) {
     val state = rememberScaffoldState()

@@ -4,12 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import app.config.fillPlatformWidth
 import core.const.ColorConst
 import core.const.SizeConst
 import core.const.TextConst
@@ -30,10 +29,9 @@ import otvechayloui.composeapp.generated.resources.*
 fun AuthScreen(
     component: AuthComponent
 ) {
-    val state by component.stateComponent.collectAsState()
-
     SnackBarHandlerScaffold(
-        snackBarComponent = component.snackBarComponent
+        snackBarComponent = component.snackBarComponent,
+        modifier = Modifier.fillPlatformWidth()
     ) { paddingValues ->
         Box(
             contentAlignment = Alignment.Center,
@@ -82,7 +80,7 @@ fun AuthScreen(
                     onClick = component::authorize,
                     text = stringResource(Res.string.enter),
                     isLoading = component.stateComponent.collectAsState().value.isLoading,
-                    modifier = Modifier.width(TextFieldDefaults.MinWidth),
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
         }

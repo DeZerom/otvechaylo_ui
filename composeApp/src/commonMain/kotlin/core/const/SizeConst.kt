@@ -24,5 +24,7 @@ object SizeConst {
 
         val BUTTON_PROGRESS_SIZE = 32.dp
         val BUTTON_PROGRESS_THICKNESS = 2.dp
+
+        val DESKTOP_FIXED_WIDTH = 260.dp
     }
 }

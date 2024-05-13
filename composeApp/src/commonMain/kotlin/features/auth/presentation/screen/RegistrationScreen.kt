@@ -3,11 +3,11 @@ package features.auth.presentation.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import app.config.fillPlatformWidth
 import core.const.SizeConst
 import core.const.TextConst
 import core.utils.extension.collectAsState
@@ -31,7 +31,8 @@ fun RegistrationScreen(
     val state by component.stateComponent.collectAsState()
 
     SnackBarHandlerScaffold(
-        snackBarComponent = component.snackBarComponent
+        snackBarComponent = component.snackBarComponent,
+        modifier = Modifier.fillPlatformWidth()
     ) {
         Box(
             contentAlignment = Alignment.Center,
@@ -76,7 +77,7 @@ fun RegistrationScreen(
                     onClick = component::register,
                     text = stringResource(Res.string.register),
                     isLoading = state.isLoading,
-                    modifier = Modifier.width(TextFieldDefaults.MinWidth),
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
         }
