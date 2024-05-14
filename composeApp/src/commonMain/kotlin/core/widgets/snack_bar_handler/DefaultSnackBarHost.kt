@@ -33,7 +33,7 @@ fun DefaultSnackBarHost(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.CheckCircle,
+                    imageVector = type?.icon ?: Icons.Outlined.CheckCircle,
                     contentDescription = null,
                     modifier = Modifier.size(SizeConst.IconSize.L),
                     tint = Color.White

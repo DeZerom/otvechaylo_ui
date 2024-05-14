@@ -1,10 +1,8 @@
 package core.widgets.buttons
 
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -13,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import core.const.ShapeConst
 import core.const.SizeConst
 import core.const.TextConst
+import core.widgets.loader.Loader
 
 @Composable
 fun DefaultButton(
@@ -34,10 +33,9 @@ fun DefaultButton(
         .then(modifier)
 ) {
     if (isLoading) {
-        CircularProgressIndicator(
-            color = textColor,
-            strokeWidth = SizeConst.Elements.BUTTON_PROGRESS_THICKNESS,
-            modifier = Modifier.size(SizeConst.Elements.BUTTON_PROGRESS_SIZE))
+        Loader(
+            color = textColor
+        )
     } else {
         Text(
             text = text,

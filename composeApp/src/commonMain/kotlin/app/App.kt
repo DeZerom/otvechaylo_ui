@@ -24,7 +24,7 @@ fun App(
             when (val child = it.instance) {
                 is AuthNavComponent.Child.Auth -> AuthScreen(child.component)
                 is AuthNavComponent.Child.Registration -> RegistrationScreen(child.component)
-                is AuthNavComponent.Child.Contexts -> ContextsListScreen()
+                is AuthNavComponent.Child.Contexts -> ContextsListScreen(child.component)
             }
         }
     }

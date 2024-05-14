@@ -28,6 +28,7 @@ settings = "1.1.1"
 [libraries]
 compose-jetbrains-expui-theme = { module = "com.bybutter.compose:compose-jetbrains-expui-theme", version.ref = "composeJetbrainsExpuiTheme" }
 compose-jetbrains-expui-theme-v200 = { module = "com.bybutter.compose:compose-jetbrains-expui-theme", version.ref = "bybutter-composeJetbrainsExpuiTheme" }
+compose-material-icons = { module = "org.jetbrains.compose.material:material-icons-extended-desktop", version.ref = "compose" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }

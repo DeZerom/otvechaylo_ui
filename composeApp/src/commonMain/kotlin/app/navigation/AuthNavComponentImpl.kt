@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import features.auth.presentation.component.AuthComponent
 import features.auth.presentation.component.RegistrationComponent
+import features.contexts.presentation.component.ContextsListComponent
 import kotlinx.serialization.Serializable
 
 class AuthNavComponentImpl(
@@ -40,7 +41,11 @@ class AuthNavComponentImpl(
             )
         )
 
-        ChildConfig.Contexts -> AuthNavComponent.Child.Contexts()
+        ChildConfig.Contexts -> AuthNavComponent.Child.Contexts(
+            ContextsListComponent(
+                componentContext = componentContext
+            )
+        )
     }
 
     @Serializable

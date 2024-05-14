@@ -23,4 +23,6 @@
     <string name="local_source">Локально</string>
     <string name="both_source">Локально и в облаке</string>
     <string name="both_source_conflict">Локально и в облаке (есть различия)</string>
+    <string name="there_is_empty">Здесь пусто</string>
+    <string name="add_context">Добавьте контекст</string>
 </resources>

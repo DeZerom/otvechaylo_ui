@@ -4,6 +4,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import features.auth.presentation.component.AuthComponent
 import features.auth.presentation.component.RegistrationComponent
+import features.contexts.presentation.component.ContextsListComponent
 
 interface AuthNavComponent {
     val childStack: Value<ChildStack<*, Child>>
@@ -13,6 +14,6 @@ interface AuthNavComponent {
 
         class Registration(val component: RegistrationComponent): Child
 
-        class Contexts(): Child
+        class Contexts(val component: ContextsListComponent): Child
     }
 }

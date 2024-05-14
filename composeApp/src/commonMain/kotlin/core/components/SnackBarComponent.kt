@@ -1,6 +1,10 @@
 package core.components
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import core.const.ColorConst
 import core.utils.text_res.TextResource
 import core.utils.text_res.TextResource.Companion.TextResource
@@ -32,15 +36,18 @@ class SnackBarComponent {
     sealed class Type {
         abstract val message: TextResource
         abstract val color: Color
+        abstract val icon: ImageVector
 
         class Success(
             override val message: TextResource,
-            override val color: Color = ColorConst.SnackBarBg.SUCCESS
+            override val color: Color = ColorConst.SnackBarBg.SUCCESS,
+            override val icon: ImageVector = Icons.Outlined.CheckCircle
         ): Type()
 
         class Error(
             override val message: TextResource,
-            override val color: Color = ColorConst.SnackBarBg.ERROR
+            override val color: Color = ColorConst.SnackBarBg.ERROR,
+            override val icon: ImageVector = Icons.Outlined.ErrorOutline
         ): Type()
     }
 }

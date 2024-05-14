@@ -36,6 +36,10 @@ class AuthRepository(
         return !settingsSource.getToken().isNullOrBlank()
     }
 
+    fun getToken(): String {
+        return settingsSource.getToken() ?: ""
+    }
+
     suspend fun register(
         login: String,
         password: String
