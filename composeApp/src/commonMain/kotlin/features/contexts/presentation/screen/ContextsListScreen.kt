@@ -3,6 +3,8 @@ package features.contexts.presentation.screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ContentPasteSearch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -13,6 +15,7 @@ import core.const.SizeConst
 import core.const.TextConst
 import core.utils.extension.collectAsState
 import core.widgets.app_bar.TitleAppBar
+import core.widgets.icons.RoundedBgIcon
 import core.widgets.loader.Loader
 import core.widgets.snack_bar_handler.SnackBarHandlerScaffold
 import features.contexts.presentation.component.ContextsListComponent
@@ -81,6 +84,11 @@ private fun Placeholder() {
             verticalArrangement = Arrangement.spacedBy(SizeConst.Padding.XS),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            RoundedBgIcon(
+                icon = Icons.Outlined.ContentPasteSearch,
+                iconSize = SizeConst.IconSize.XXL,
+                iconPadding = SizeConst.Padding.XS
+            )
             Text(
                 text = stringResource(Res.string.there_is_empty),
                 style = TextConst.MTitle

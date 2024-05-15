@@ -17,9 +17,11 @@ fun DefaultTextField(
     value: String,
     onValueChange: (String) -> Unit,
     labelText: String,
+    modifier: Modifier = Modifier,
     placeholderText: String = "",
     isSingleLine: Boolean = true,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     var isFocused by remember { mutableStateOf(false) }
 
@@ -55,7 +57,8 @@ fun DefaultTextField(
         shape = ShapeConst.DEFAULT_SHAPE,
         singleLine = isSingleLine,
         visualTransformation = visualTransformation,
-        modifier = Modifier
+        trailingIcon = trailingIcon,
+        modifier = modifier
             .onFocusChanged { isFocused = it.isFocused }
     )
 }

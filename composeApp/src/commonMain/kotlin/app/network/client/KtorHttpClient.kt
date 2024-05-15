@@ -37,6 +37,9 @@ fun buildAuthClient(authSource: AuthSettingsSource) = HttpClient {
     defaultRequest {
         url(BASE_URL)
         contentType(ContentType.Application.Json)
-        header(AUTH_HEADER, authSource.getToken() ?: "")
+        header(
+            key = AUTH_HEADER,
+            value = "d1664dfe-decb-4415-bf70-c046bc1d0634" //authSource.getToken() ?: ""
+        )
     }
 }

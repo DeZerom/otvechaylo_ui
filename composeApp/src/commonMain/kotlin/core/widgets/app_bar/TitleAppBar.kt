@@ -1,6 +1,5 @@
 package core.widgets.app_bar
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,11 +11,9 @@ import core.const.TextConst
 fun TitleAppBar(
     title: String
 ) {
-    Row {
-        Text(
-            text = title,
-            style = TextConst.BTitle,
-            modifier = Modifier.padding(start = SizeConst.Padding.M)
-        )
-    }
+    Text(
+        text = title,
+        style = TextConst.BTitle,
+        modifier = Modifier.padding(start = SizeConst.Padding.M, top = SizeConst.Padding.S)
+    )
 }

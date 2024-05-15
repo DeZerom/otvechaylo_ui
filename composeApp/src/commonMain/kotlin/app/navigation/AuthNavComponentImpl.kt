@@ -1,10 +1,14 @@
 package app.navigation
 
+import app.config.AppConfig
+import app.config.CURRENT_CONFIG
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import features.auth.presentation.component.AuthComponent
 import features.auth.presentation.component.RegistrationComponent
+import features.contexts.presentation.component.ContextDetailComponent
+import features.contexts.presentation.component.ContextScreenManagerComponent
 import features.contexts.presentation.component.ContextsListComponent
 import kotlinx.serialization.Serializable
 
@@ -30,7 +34,14 @@ class AuthNavComponentImpl(
             AuthComponent(
                 componentContext = componentContext,
                 navigateToRegistration = { navigation.push(ChildConfig.Registration) },
-                onAuthorized = { navigation.replaceCurrent(ChildConfig.Contexts) }
+                onAuthorized = {
+                    navigation.replaceCurrent(
+                        when (CURRENT_CONFIG) {
+                            AppConfig.DESKTOP -> ChildConfig.ContextManager
+                            AppConfig.MOBILE -> ChildConfig.Contexts
+                        }
+                    )
+                }
             )
         )
 
@@ -41,8 +52,23 @@ class AuthNavComponentImpl(
             )
         )
 
+        ChildConfig.ContextManager -> AuthNavComponent.Child.ContextManager(
+            component = ContextScreenManagerComponent(
+                componentContext = componentContext,
+                listComponent = ContextsListComponent(
+                    componentContext = componentContext,
+                )
+            )
+        )
+
         ChildConfig.Contexts -> AuthNavComponent.Child.Contexts(
             ContextsListComponent(
+                componentContext = componentContext
+            )
+        )
+
+        ChildConfig.ContextDetail -> AuthNavComponent.Child.ContextDetail(
+            ContextDetailComponent(
                 componentContext = componentContext
             )
         )
@@ -57,6 +83,12 @@ class AuthNavComponentImpl(
         data object Registration: ChildConfig
 
         @Serializable
+        data object ContextManager: ChildConfig
+
+        @Serializable
         data object Contexts: ChildConfig
+
+        @Serializable
+        data object ContextDetail: ChildConfig
     }
 }

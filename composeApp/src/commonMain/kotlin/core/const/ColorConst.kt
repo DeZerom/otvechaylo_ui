@@ -24,6 +24,7 @@ object ColorConst {
         val ACCENT = piper
         val BLUE = easternBlue
         val GREEN = forestGreen
+        val WHITE = Color.White
     }
 }
 

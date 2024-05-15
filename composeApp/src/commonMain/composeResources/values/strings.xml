@@ -25,4 +25,12 @@
     <string name="both_source_conflict">Локально и в облаке (есть различия)</string>
     <string name="there_is_empty">Здесь пусто</string>
     <string name="add_context">Добавьте контекст</string>
+
+    <string name="context">Контекст</string>
+    <string name="content">Содержание</string>
+    <string name="hide">Скрыть</string>
+    <string name="show">Показать</string>
+    <string name="question">Вопрос</string>
+    <string name="answer">Ответ</string>
+    <string name="edit">Редактировать</string>
 </resources>
