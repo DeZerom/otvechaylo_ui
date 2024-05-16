@@ -33,4 +33,6 @@
     <string name="question">Вопрос</string>
     <string name="answer">Ответ</string>
     <string name="edit">Редактировать</string>
+    <string name="ask_question">Задайте вопрос</string>
+    <string name="no_answer">Ответ не найден :(</string>
 </resources>

@@ -18,6 +18,7 @@ object ColorConst {
         val PRIMARY = Color.White
         val SECONDARY = gray
         val DARK = darkMineShaft
+        val ERROR = oldBrick
     }
 
     object Colors {

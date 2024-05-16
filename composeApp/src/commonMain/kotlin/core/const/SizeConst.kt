@@ -26,5 +26,7 @@ object SizeConst {
         val PROGRESS_THICKNESS = 2.dp
 
         val DESKTOP_FIXED_WIDTH = 260.dp
+
+        val MIN_ANSWER_HEIGHT = 150.dp
     }
 }

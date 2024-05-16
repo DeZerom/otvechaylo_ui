@@ -36,6 +36,6 @@ fun WideContextsScreen(
                 .fillMaxHeight()
                 .width(1.dp)
         )
-        ContextDetailScreen()
+        ContextDetailScreen(null)
     }
 }

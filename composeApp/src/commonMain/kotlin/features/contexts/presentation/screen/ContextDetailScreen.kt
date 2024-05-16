@@ -13,16 +13,32 @@ import core.const.ColorConst
 import core.const.SizeConst
 import core.const.TextConst
 import core.widgets.app_bar.BackAppBar
+import core.widgets.buttons.AccentButton
 import core.widgets.icons.RoundedBgIcon
 import core.widgets.spacings.VerticalSpacer
 import core.widgets.text_field.DefaultTextField
+import features.contexts.presentation.component.ContextDetailComponent
+import features.contexts.presentation.widget.AnswerWidget
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import otvechayloui.composeapp.generated.resources.*
 
+@Composable
+fun ContextDetailScreen(
+    component: ContextDetailComponent?
+) {
+    if (component == null) {
+        Text("qwe")
+    } else {
+        Content(component)
+    }
+}
+
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun ContextDetailScreen() {
+private fun Content(
+    component: ContextDetailComponent
+) {
     val isShown = true
 
     Scaffold(
@@ -73,6 +89,12 @@ fun ContextDetailScreen() {
                 modifier = Modifier.fillMaxWidth()
             )
             VerticalSpacer(SizeConst.Padding.XS)
+            AnswerWidget(component = component.answerComponent)
+            VerticalSpacer(SizeConst.Padding.M)
+            AccentButton(
+                onClick = {},
+                text = stringResource(Res.string.edit)
+            )
         }
     }
 }

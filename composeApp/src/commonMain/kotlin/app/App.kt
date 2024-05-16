@@ -28,7 +28,7 @@ fun App(
                 is AuthNavComponent.Child.Registration -> RegistrationScreen(child.component)
                 is AuthNavComponent.Child.ContextManager -> ContextScreenManager(child.component)
                 is AuthNavComponent.Child.Contexts -> ContextsListScreen(child.component)
-                is AuthNavComponent.Child.ContextDetail -> ContextDetailScreen()
+                is AuthNavComponent.Child.ContextDetail -> ContextDetailScreen(child.component)
             }
         }
     }
