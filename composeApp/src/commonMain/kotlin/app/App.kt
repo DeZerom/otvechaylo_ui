@@ -10,6 +10,7 @@ import features.auth.presentation.screen.RegistrationScreen
 import features.contexts.presentation.screen.ContextDetailScreen
 import features.contexts.presentation.screen.ContextScreenManager
 import features.contexts.presentation.screen.ContextsListScreen
+import features.editing.presentation.screen.ContextEditingScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -29,6 +30,7 @@ fun App(
                 is AuthNavComponent.Child.ContextManager -> ContextScreenManager(child.component)
                 is AuthNavComponent.Child.Contexts -> ContextsListScreen(child.component)
                 is AuthNavComponent.Child.ContextDetail -> ContextDetailScreen(child.component)
+                is AuthNavComponent.Child.Edit -> ContextEditingScreen(child.component)
             }
         }
     }

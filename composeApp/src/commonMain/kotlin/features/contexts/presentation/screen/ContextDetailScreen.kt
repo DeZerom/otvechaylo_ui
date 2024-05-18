@@ -140,7 +140,7 @@ private fun Content(
             )
             VerticalSpacer(SizeConst.Padding.M)
             AccentButton(
-                onClick = {},
+                onClick = component::onEditPressed,
                 text = stringResource(Res.string.edit),
                 modifier = Modifier.fillPlatformWidth()
             )

@@ -25,7 +25,8 @@ import otvechayloui.composeapp.generated.resources.unknown_error
 
 class ContextDetailComponent(
     componentContext: ComponentContext,
-    private val onBackPressed: () -> Unit
+    private val onBackPressed: () -> Unit,
+    private val onEditPressed: (String) -> Unit
 ): BaseCoroutineComponent(componentContext), KoinComponent {
     val questionComponent = TextInputComponent(LengthValidator.notEmpty())
     val stateComponent = StateComponent(ContextDetailScreenState())
@@ -63,6 +64,10 @@ class ContextDetailComponent(
         } else {
             showContext()
         }
+    }
+
+    fun onEditPressed() {
+        onEditPressed(stateComponent.state.value.id)
     }
 
     @OptIn(ExperimentalResourceApi::class)

@@ -7,6 +7,7 @@ import features.auth.presentation.component.RegistrationComponent
 import features.contexts.presentation.component.ContextDetailComponent
 import features.contexts.presentation.component.ContextScreenManagerComponent
 import features.contexts.presentation.component.ContextsListComponent
+import features.editing.presentation.component.ContextEditingComponent
 
 interface AuthNavComponent {
     val childStack: Value<ChildStack<*, Child>>
@@ -21,5 +22,7 @@ interface AuthNavComponent {
         class Contexts(val component: ContextsListComponent): Child
 
         class ContextDetail(val component: ContextDetailComponent): Child
+
+        class  Edit(val component: ContextEditingComponent): Child
     }
 }

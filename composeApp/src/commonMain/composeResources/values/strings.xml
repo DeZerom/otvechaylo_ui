@@ -41,4 +41,14 @@
     <string name="context_not_loaded_message">Контекста нет на вашем устройстве. Вы уверены, что хотите загрузить его?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+
+    <string name="editing">Редактирование</string>
+    <string name="creation">Создание</string>
+    <string name="context_name">Название контекста</string>
+    <string name="description">Описание</string>
+    <string name="content">Содержание</string>
+    <string name="saving">Сохранение</string>
+    <string name="locally">Локально</string>
+    <string name="on_server">На сервере</string>
+    <string name="save">Сохранить</string>
 </resources>
