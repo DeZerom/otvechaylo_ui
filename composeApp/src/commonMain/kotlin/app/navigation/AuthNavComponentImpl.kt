@@ -91,6 +91,7 @@ class AuthNavComponentImpl(
         is ChildConfig.Edit -> AuthNavComponent.Child.Edit(
             ContextEditingComponent(
                 componentContext = componentContext,
+                id = config.id,
                 onBackPressed = { navigation.pop() }
             )
         )
