@@ -8,7 +8,9 @@ data class ContextDetailScreenState(
     val name: String = "",
     val description: String = "",
     val context: String = "",
+    val answerState: AnswerState = AnswerState.Initial,
     val isFullyLoaded: Boolean = false,
     val isShown: Boolean = false,
-    val isLoading: Boolean = false,
+    val isContextLoading: Boolean = false,
+    val isSendQuestionButtonVisible: Boolean = true
 )

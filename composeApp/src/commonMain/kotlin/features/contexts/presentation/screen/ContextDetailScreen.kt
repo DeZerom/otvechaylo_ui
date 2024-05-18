@@ -114,7 +114,7 @@ private fun Content(
                     text = state.context,
                     style = TextConst.MT
                 )
-            } else if (state.isLoading) {
+            } else if (state.isContextLoading) {
                 VerticalSpacer(height = SizeConst.Padding.XS)
                 Loader(color = ColorConst.Colors.WHITE)
             }
@@ -123,12 +123,19 @@ private fun Content(
                 value = component.questionComponent.collectTextAsState().value,
                 onValueChange = { component.questionComponent.onChanged(it) },
                 labelText = stringResource(Res.string.question),
-                trailingIcon = { RoundedBgIcon(Icons.AutoMirrored.Outlined.Send) },
+                trailingIcon = {
+                    if (state.isSendQuestionButtonVisible) {
+                        RoundedBgIcon(
+                            icon = Icons.AutoMirrored.Outlined.Send,
+                            modifier = Modifier.clickable { component.getAnswer() }
+                        )
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             )
             VerticalSpacer(SizeConst.Padding.XS)
             AnswerWidget(
-                component = component.answerComponent,
+                state = state.answerState,
                 modifier = Modifier.fillMaxWidth()
             )
             VerticalSpacer(SizeConst.Padding.M)

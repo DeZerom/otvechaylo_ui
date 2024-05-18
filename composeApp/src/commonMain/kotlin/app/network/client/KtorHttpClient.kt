@@ -34,6 +34,10 @@ fun buildAuthClient(authSource: AuthSettingsSource) = HttpClient {
         logger = Logger.DEFAULT
         level = LogLevel.HEADERS
     }
+    install(HttpTimeout) {
+        requestTimeoutMillis = 60000
+        socketTimeoutMillis = 60000
+    }
     defaultRequest {
         url(BASE_URL)
         contentType(ContentType.Application.Json)

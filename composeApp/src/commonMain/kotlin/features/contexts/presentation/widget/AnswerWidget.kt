@@ -4,14 +4,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import core.const.ColorConst
 import core.const.ShapeConst
 import core.const.SizeConst
 import core.const.TextConst
 import core.widgets.loader.Loader
-import features.contexts.presentation.component.AnswerComponent
 import features.contexts.presentation.model.AnswerState
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
@@ -23,7 +22,7 @@ import otvechayloui.composeapp.generated.resources.no_answer
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun AnswerWidget(
-    component: AnswerComponent,
+    state: AnswerState,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -41,7 +40,7 @@ fun AnswerWidget(
                 text = stringResource(Res.string.answer),
                 style = TextConst.ST.copy(color = ColorConst.Colors.ACCENT)
             )
-            Content(state = component.state.collectAsState().value)
+            Content(state = state)
         }
     }
 }
@@ -73,8 +72,10 @@ private fun Content(
                 style = TextConst.MT.copy(color = ColorConst.Colors.BLUE)
             )
         AnswerState.Loading ->
-            Loader(
-                modifier = Modifier.fillMaxSize()
-            )
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Loader(
+                    color = ColorConst.Colors.WHITE,
+                )
+            }
     }
 }
