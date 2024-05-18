@@ -14,9 +14,13 @@ suspend inline fun <reified B: Any?, reified R> HttpClient.makePost(
 }
 
 suspend inline fun <reified R> HttpClient.makeGet(
-    url: String
+    url: String,
+    parameters: List<Pair<String, Any?>> = emptyList()
 ): Result<R> = safeApiCall {
     get {
         url(url)
+        parameters.forEach {
+            parameter(it.first, it.second)
+        }
     }
 }

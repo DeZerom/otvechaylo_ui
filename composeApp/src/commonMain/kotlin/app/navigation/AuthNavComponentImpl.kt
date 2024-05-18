@@ -7,6 +7,7 @@ import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import features.auth.presentation.component.AuthComponent
 import features.auth.presentation.component.RegistrationComponent
+import features.contexts.domain.model.ContextLightweight
 import features.contexts.presentation.component.ContextDetailComponent
 import features.contexts.presentation.component.ContextScreenManagerComponent
 import features.contexts.presentation.component.ContextsListComponent
@@ -52,25 +53,36 @@ class AuthNavComponentImpl(
             )
         )
 
-        ChildConfig.ContextManager -> AuthNavComponent.Child.ContextManager(
-            component = ContextScreenManagerComponent(
-                componentContext = componentContext,
-                listComponent = ContextsListComponent(
+        ChildConfig.ContextManager -> {
+            val contextDetailComponent = ContextDetailComponent(
+                componentContext,
+                onBackPressed = {}
+            )
+
+            AuthNavComponent.Child.ContextManager(
+                component = ContextScreenManagerComponent(
                     componentContext = componentContext,
+                    listComponent = ContextsListComponent(
+                        componentContext = componentContext,
+                        onContextClicked = { contextDetailComponent.setContext(it) }
+                    ),
+                    contextDetailComponent = contextDetailComponent
                 )
             )
-        )
+        }
 
         ChildConfig.Contexts -> AuthNavComponent.Child.Contexts(
             ContextsListComponent(
-                componentContext = componentContext
+                componentContext = componentContext,
+                onContextClicked = { navigation.push(ChildConfig.ContextDetail(it)) }
             )
         )
 
-        ChildConfig.ContextDetail -> AuthNavComponent.Child.ContextDetail(
+        is ChildConfig.ContextDetail -> AuthNavComponent.Child.ContextDetail(
             ContextDetailComponent(
-                componentContext = componentContext
-            )
+                componentContext = componentContext,
+                onBackPressed = { navigation.pop() }
+            ).also { it.setContext(config.context) }
         )
     }
 
@@ -89,6 +101,6 @@ class AuthNavComponentImpl(
         data object Contexts: ChildConfig
 
         @Serializable
-        data object ContextDetail: ChildConfig
+        data class ContextDetail(val context: ContextLightweight): ChildConfig
     }
 }

@@ -1,5 +1,6 @@
 package features.contexts.presentation.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
@@ -18,6 +19,7 @@ import core.widgets.app_bar.TitleAppBar
 import core.widgets.icons.RoundedBgIcon
 import core.widgets.loader.Loader
 import core.widgets.snack_bar_handler.SnackBarHandlerScaffold
+import features.contexts.domain.model.ContextLightweight
 import features.contexts.presentation.component.ContextsListComponent
 import features.contexts.presentation.model.ContextsListScreenState
 import features.contexts.presentation.widget.ContextListItem
@@ -43,14 +45,15 @@ fun ContextsListScreen(
         if (state.isLoading) {
             Loader(modifier = Modifier.fillMaxSize())
         } else {
-            Content(state)
+            Content(state, component::onClicked)
         }
     }
 }
 
 @Composable
 private fun Content(
-    state: ContextsListScreenState
+    state: ContextsListScreenState,
+    onClicked: (ContextLightweight) -> Unit
 ) {
     if (state.items.isNotEmpty()) {
         LazyColumn(
@@ -60,11 +63,14 @@ private fun Content(
                 key = { state.items[it].id },
                 count = state.items.size
             ) {
+                val item = state.items[it]
+
                 ContextListItem(
-                    context = state.items[it],
+                    context = item,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = SizeConst.Padding.M)
+                        .clickable { onClicked(item) }
                 )
             }
         }

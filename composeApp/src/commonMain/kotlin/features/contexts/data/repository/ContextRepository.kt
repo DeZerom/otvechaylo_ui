@@ -1,8 +1,10 @@
 package features.contexts.data.repository
 
+import features.contexts.data.model.ContextRichDto
 import features.contexts.data.sources.ContextNetworkSource
 import features.contexts.domain.mapper.toDomain
 import features.contexts.domain.model.ContextLightweight
+import features.contexts.domain.model.ContextRich
 import features.contexts.domain.model.ContextSource
 
 class ContextRepository(
@@ -18,6 +20,10 @@ class ContextRepository(
                 )
             }
         }
+    }
+
+    suspend fun getRich(id: String): Result<ContextRich> {
+        return networkSource.getRich(id).map(ContextRichDto::toDomain)
     }
 
 }
