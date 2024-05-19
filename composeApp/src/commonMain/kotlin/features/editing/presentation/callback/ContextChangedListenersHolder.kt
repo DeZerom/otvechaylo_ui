@@ -1,5 +1,7 @@
 package features.editing.presentation.callback
 
+import features.contexts.domain.model.ContextRich
+
 object ContextChangedListenersHolder {
     private val listeners = mutableListOf<ContextChangedListener>()
 
@@ -11,4 +13,6 @@ object ContextChangedListenersHolder {
         id: String?,
         payload: ContextChangePayload
     ) = listeners.forEach { it.onChanged(id, payload) }
+
+    fun onContextAdded(context: ContextRich) = listeners.forEach { it.onAdded(context) }
 }

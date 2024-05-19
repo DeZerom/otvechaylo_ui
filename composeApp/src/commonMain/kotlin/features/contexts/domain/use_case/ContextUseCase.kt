@@ -17,17 +17,22 @@ class ContextUseCase(
     }
 
     suspend fun saveContext(
-        id: String?,
+        onlyLocally: Boolean,
+        name: String,
+        description: String,
+        context: String
+    ): Result<ContextRich> {
+        return repository.saveContext(name, description, context, onlyLocally)
+    }
+
+    suspend fun saveChanges(
+        id: String,
         onlyLocally: Boolean,
         name: String,
         description: String,
         context: String
     ): Result<Boolean> {
-        return if (id != null) {
-            repository.saveChanges(id, name, description, context)
-        } else {
-            repository.saveContext(name, description, context).map { it.id.isNotBlank() }
-        }
+        return repository.saveChanges(id, name, description, context, onlyLocally)
     }
 
 }

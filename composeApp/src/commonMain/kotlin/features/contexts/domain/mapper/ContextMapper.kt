@@ -27,3 +27,11 @@ fun ContextRichDto.toDomain(
     context = context ?: "",
     source = source
 )
+
+fun ContextRich.toLightweight() = ContextLightweight(
+    id = id,
+    name = name,
+    description = description,
+    source = source,
+    hasConflict = false
+)

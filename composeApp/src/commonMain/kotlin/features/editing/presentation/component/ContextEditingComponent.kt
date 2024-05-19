@@ -62,17 +62,16 @@ class ContextEditingComponent(
 
         stateComponent.reduce { copy(isSaving = true) }
 
-        contextUseCase.saveContext(
-            id = id,
-            onlyLocally = onlyLocally,
-            name = nameComponent.value.value,
-            description = descriptionComponent.value.value,
-            context = contextComponent.value.value
-        ).fold(
-            onSuccess = {
-                if (it) {
+        if (id != null) {
+            contextUseCase.saveChanges(
+                id = id,
+                onlyLocally = onlyLocally,
+                name = nameComponent.value.value,
+                description = descriptionComponent.value.value,
+                context = contextComponent.value.value
+            ).fold(
+                onSuccess = {
                     snackBarComponent.showSuccess(TextResource(Res.string.saved_successfully))
-
                     ContextChangedListenersHolder.onContextChanged(
                         id = id,
                         payload = ContextChangePayload(
@@ -82,16 +81,34 @@ class ContextEditingComponent(
                             source = if (onlyLocally) ContextSource.DB else ContextSource.BOTH
                         )
                     )
-                } else {
+                },
+                onFailure = {
                     snackBarComponent.showError(TextResource(Res.string.unknown_error))
                 }
-            },
-            onFailure = {
-                snackBarComponent.showError(it.message)
-            }
-        )
+            )
+        } else {
+            contextUseCase.saveContext(
+                onlyLocally = onlyLocally,
+                name = nameComponent.value.value,
+                description = descriptionComponent.value.value,
+                context = contextComponent.value.value
+            ).fold(
+                onSuccess = {
+                    snackBarComponent.showSuccess(TextResource(Res.string.saved_successfully))
+                    ContextChangedListenersHolder.onContextAdded(it)
+                },
+                onFailure = {
+                    snackBarComponent.showError(TextResource(Res.string.unknown_error))
+                }
+            )
+        }
 
-        stateComponent.reduce { copy(isSaving = false) }
+        stateComponent.reduce {
+            copy(
+                isSaving = false,
+                isSavingTypeChooseVisible = onlyLocally
+            )
+        }
     }
 
     private fun validate() = nameComponent.validate()

@@ -10,6 +10,7 @@ import core.components.StateComponent
 import core.components.TextInputComponent
 import core.utils.text_validators.LengthValidator
 import features.contexts.domain.model.ContextLightweight
+import features.contexts.domain.model.ContextRich
 import features.contexts.domain.model.ContextSource
 import features.contexts.domain.use_case.AnsweringUseCase
 import features.contexts.domain.use_case.ContextUseCase
@@ -47,6 +48,8 @@ class ContextDetailComponent(
             ContextChangedListenersHolder.unregister(this)
         }
     }
+
+    override fun onAdded(context: ContextRich) = Unit
 
     override fun onChanged(id: String?, payload: ContextChangePayload) {
         if (stateComponent.state.value.id != id) return

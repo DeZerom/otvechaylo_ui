@@ -5,7 +5,9 @@ import com.arkivanov.essenty.lifecycle.doOnDestroy
 import core.components.BaseCoroutineComponent
 import core.components.SnackBarComponent
 import core.components.StateComponent
+import features.contexts.domain.mapper.toLightweight
 import features.contexts.domain.model.ContextLightweight
+import features.contexts.domain.model.ContextRich
 import features.contexts.domain.use_case.ContextUseCase
 import features.contexts.presentation.model.ContextsListScreenState
 import features.editing.presentation.callback.ContextChangePayload
@@ -30,6 +32,14 @@ class ContextsListComponent(
         ContextChangedListenersHolder.register(this)
         doOnDestroy {
             ContextChangedListenersHolder.unregister(this)
+        }
+    }
+
+    override fun onAdded(context: ContextRich) {
+        state.reduce {
+            copy(
+                items = state.state.value.items + context.toLightweight()
+            )
         }
     }
 

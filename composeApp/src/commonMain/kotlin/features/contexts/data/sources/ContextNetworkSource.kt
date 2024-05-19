@@ -1,6 +1,7 @@
 package features.contexts.data.sources
 
 import core.dto.BooleanResultDto
+import core.dto.StringResultDto
 import core.utils.network.makeGet
 import core.utils.network.makePatch
 import core.utils.network.makePost
@@ -42,7 +43,7 @@ class ContextNetworkSource(private val client: HttpClient) {
         name: String,
         description: String,
         context: String
-    ): Result<ContextRichDto> {
+    ): Result<StringResultDto> {
         return client.makePost(
             url = "/save_context",
             body = SaveContextDto(
