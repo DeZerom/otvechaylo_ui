@@ -3,6 +3,7 @@ package features.editing.presentation.screen
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import core.const.ColorConst
 import core.const.SizeConst
@@ -52,6 +53,8 @@ fun ContextEditingScreen(
 private fun Content(
     component: ContextEditingComponent
 ) {
+    val state by component.stateComponent.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -88,7 +91,7 @@ private fun Content(
         )
         VerticalSpacer(height = SizeConst.Padding.XS)
         RoundButtonsGroup(
-            selectedIndex = 0,
+            selectedIndex = state.selectedIndex,
             onChange = component::onSavingTypeChange,
             items = listOf(
                 RoundButtonState(stringResource(Res.string.locally)),
@@ -99,6 +102,7 @@ private fun Content(
         AccentButton(
             onClick = component::onSaveClicked,
             text = stringResource(Res.string.save),
+            isLoading = state.isSaving,
             modifier = Modifier.fillMaxWidth()
         )
     }

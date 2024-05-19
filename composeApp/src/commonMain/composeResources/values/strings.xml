@@ -48,7 +48,8 @@
     <string name="description">Описание</string>
     <string name="content">Содержание</string>
     <string name="saving">Сохранение</string>
-    <string name="locally">Локально</string>
-    <string name="on_server">На сервере</string>
+    <string name="locally">Только локально</string>
+    <string name="on_server">Локльно и на сервере</string>
     <string name="save">Сохранить</string>
+    <string name="saved_successfully">Успешно сохранено</string>
 </resources>

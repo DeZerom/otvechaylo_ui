@@ -1,8 +1,12 @@
 package features.contexts.data.sources
 
+import core.dto.BooleanResultDto
 import core.utils.network.makeGet
+import core.utils.network.makePatch
+import core.utils.network.makePost
 import features.contexts.data.model.ContextLightweightDto
 import features.contexts.data.model.ContextRichDto
+import features.contexts.data.model.SaveContextDto
 import io.ktor.client.*
 
 class ContextNetworkSource(private val client: HttpClient) {
@@ -15,6 +19,37 @@ class ContextNetworkSource(private val client: HttpClient) {
         return client.makeGet(
             url = "/context_rich",
             parameters = listOf(Pair("context_id", id))
+        )
+    }
+
+    suspend fun saveChanges(
+        id: String,
+        name: String,
+        description: String,
+        context: String
+    ): Result<BooleanResultDto> {
+        return client.makePatch(
+            url = "/update_context/$id",
+            body = SaveContextDto(
+                name = name,
+                description = description,
+                context = context
+            )
+        )
+    }
+
+    suspend fun saveContext(
+        name: String,
+        description: String,
+        context: String
+    ): Result<ContextRichDto> {
+        return client.makePost(
+            url = "/save_context",
+            body = SaveContextDto(
+                name = name,
+                description = description,
+                context = context
+            )
         )
     }
 

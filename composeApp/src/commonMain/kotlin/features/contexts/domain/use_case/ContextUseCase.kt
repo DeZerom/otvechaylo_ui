@@ -16,4 +16,18 @@ class ContextUseCase(
         return repository.getRich(id)
     }
 
+    suspend fun saveContext(
+        id: String?,
+        onlyLocally: Boolean,
+        name: String,
+        description: String,
+        context: String
+    ): Result<Boolean> {
+        return if (id != null) {
+            repository.saveChanges(id, name, description, context)
+        } else {
+            repository.saveContext(name, description, context).map { it.id.isNotBlank() }
+        }
+    }
+
 }

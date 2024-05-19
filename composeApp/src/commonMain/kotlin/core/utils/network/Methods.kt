@@ -24,3 +24,13 @@ suspend inline fun <reified R> HttpClient.makeGet(
         }
     }
 }
+
+suspend inline fun <reified B: Any?, reified R> HttpClient.makePatch(
+    url: String,
+    body: B
+): Result<R> = safeApiCall {
+    patch{
+        url(url)
+        if (body != null) setBody(body)
+    }
+}
