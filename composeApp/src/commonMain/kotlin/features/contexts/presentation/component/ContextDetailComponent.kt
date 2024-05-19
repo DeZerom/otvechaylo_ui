@@ -3,6 +3,7 @@ package features.contexts.presentation.component
 import app.config.AppConfig
 import app.config.CURRENT_CONFIG
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.lifecycle.doOnDestroy
 import core.components.BaseCoroutineComponent
 import core.components.SnackBarComponent
 import core.components.StateComponent
@@ -14,6 +15,9 @@ import features.contexts.domain.use_case.AnsweringUseCase
 import features.contexts.domain.use_case.ContextUseCase
 import features.contexts.presentation.model.AnswerState
 import features.contexts.presentation.model.ContextDetailScreenState
+import features.editing.presentation.callback.ContextChangePayload
+import features.editing.presentation.callback.ContextChangedListener
+import features.editing.presentation.callback.ContextChangedListenersHolder
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
@@ -27,7 +31,7 @@ class ContextDetailComponent(
     componentContext: ComponentContext,
     private val onBackPressed: () -> Unit,
     private val onEditPressed: (String) -> Unit
-): BaseCoroutineComponent(componentContext), KoinComponent {
+): BaseCoroutineComponent(componentContext), KoinComponent, ContextChangedListener {
     val questionComponent = TextInputComponent(LengthValidator.notEmpty())
     val stateComponent = StateComponent(ContextDetailScreenState())
     val snackBarComponent = SnackBarComponent()
@@ -36,6 +40,26 @@ class ContextDetailComponent(
     private val answeringUseCase: AnsweringUseCase by inject()
 
     private var hasNetworkSource = false
+
+    init {
+        ContextChangedListenersHolder.register(this)
+        doOnDestroy {
+            ContextChangedListenersHolder.unregister(this)
+        }
+    }
+
+    override fun onChanged(id: String?, payload: ContextChangePayload) {
+        if (stateComponent.state.value.id != id) return
+
+        stateComponent.reduce {
+            copy(
+                name = payload.name,
+                description = payload.description,
+                context = payload.context,
+                isFullyLoaded = true
+            )
+        }
+    }
 
     fun setContext(context: ContextLightweight) {
         hasNetworkSource = context.source == ContextSource.NETWORK || context.source == ContextSource.DB
