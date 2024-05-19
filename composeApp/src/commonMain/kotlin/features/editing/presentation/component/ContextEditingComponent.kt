@@ -8,6 +8,7 @@ import core.components.TextInputComponent
 import core.utils.text_res.TextResource.Companion.TextResource
 import core.utils.text_validators.AlwaysValidValidator
 import core.utils.text_validators.LengthValidator
+import features.contexts.domain.model.ContextSource
 import features.contexts.domain.use_case.ContextUseCase
 import features.editing.presentation.model.EditingScreenState
 import kotlinx.coroutines.launch
@@ -52,13 +53,13 @@ class ContextEditingComponent(
             return@launch
         }
 
-        val isServerSave = stateComponent.state.value.selectedIndex == 1
+        val onlyLocally = stateComponent.state.value.selectedIndex != 1
 
         stateComponent.reduce { copy(isSaving = true) }
 
         contextUseCase.saveContext(
             id = id,
-            onlyLocally = !isServerSave,
+            onlyLocally = onlyLocally,
             name = nameComponent.value.value,
             description = descriptionComponent.value.value,
             context = contextComponent.value.value
@@ -94,6 +95,9 @@ class ContextEditingComponent(
                 nameComponent.onChanged(it.name)
                 descriptionComponent.onChanged(it.description)
                 contextComponent.onChanged(it.context)
+                stateComponent.reduce { copy(
+                    isSavingTypeChooseVisible = it.source == ContextSource.DB
+                ) }
             },
             onFailure = {
                 snackBarComponent.showError(it.message)

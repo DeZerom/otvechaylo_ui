@@ -17,10 +17,13 @@ fun ContextLightweightDto.toDomain(
     hasConflict = hasConflict
 )
 
-fun ContextRichDto.toDomain() = ContextRich(
+fun ContextRichDto.toDomain(
+    source: ContextSource
+) = ContextRich(
     id = id ?: "",
     name = name ?: "",
     description = description ?: "",
     hash = hash ?: "",
-    context = context ?: ""
+    context = context ?: "",
+    source = source
 )

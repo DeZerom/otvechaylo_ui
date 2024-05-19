@@ -5,5 +5,6 @@ data class ContextRich(
     val name: String,
     val description: String,
     val hash: String,
-    val context: String
+    val context: String,
+    val source: ContextSource
 )

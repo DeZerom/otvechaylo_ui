@@ -1,6 +1,5 @@
 package features.contexts.data.repository
 
-import features.contexts.data.model.ContextRichDto
 import features.contexts.data.sources.ContextNetworkSource
 import features.contexts.domain.mapper.toDomain
 import features.contexts.domain.model.ContextLightweight
@@ -23,7 +22,7 @@ class ContextRepository(
     }
 
     suspend fun getRich(id: String): Result<ContextRich> {
-        return networkSource.getRich(id).map(ContextRichDto::toDomain)
+        return networkSource.getRich(id).map { it.toDomain(ContextSource.NETWORK) }
     }
 
     suspend fun saveChanges(
@@ -40,7 +39,7 @@ class ContextRepository(
         description: String,
         context: String
     ): Result<ContextRich> {
-        return networkSource.saveContext(name, description, context).map(ContextRichDto::toDomain)
+        return networkSource.saveContext(name, description, context).map { it.toDomain(ContextSource.NETWORK) }
     }
 
 }

@@ -1,6 +1,8 @@
 package features.editing.presentation.screen
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,6 +61,7 @@ private fun Content(
         modifier = Modifier
             .fillMaxSize()
             .padding(SizeConst.Padding.M)
+            .verticalScroll(rememberScrollState())
     ) {
         DefaultTextField(
             value = component.nameComponent.collectTextAsState().value,
@@ -84,20 +87,22 @@ private fun Content(
                 .fillMaxWidth()
                 .heightIn(min = SizeConst.Elements.MIN_ANSWER_HEIGHT)
         )
-        VerticalSpacer(height = SizeConst.Padding.XL)
-        Text(
-            text = stringResource(Res.string.saving),
-            style = TextConst.BT
-        )
-        VerticalSpacer(height = SizeConst.Padding.XS)
-        RoundButtonsGroup(
-            selectedIndex = state.selectedIndex,
-            onChange = component::onSavingTypeChange,
-            items = listOf(
-                RoundButtonState(stringResource(Res.string.locally)),
-                RoundButtonState(stringResource(Res.string.on_server))
+        if (state.isSavingTypeChooseVisible) {
+            VerticalSpacer(height = SizeConst.Padding.XL)
+            Text(
+                text = stringResource(Res.string.saving),
+                style = TextConst.BT
             )
-        )
+            VerticalSpacer(height = SizeConst.Padding.XS)
+            RoundButtonsGroup(
+                selectedIndex = state.selectedIndex,
+                onChange = component::onSavingTypeChange,
+                items = listOf(
+                    RoundButtonState(stringResource(Res.string.locally)),
+                    RoundButtonState(stringResource(Res.string.on_server))
+                )
+            )
+        }
         VerticalSpacer(height = SizeConst.Padding.M)
         AccentButton(
             onClick = component::onSaveClicked,
