@@ -16,9 +16,10 @@ import core.utils.text_res.getStringSuspending
 @Composable
 fun SnackBarHandlerScaffold(
     snackBarComponent: SnackBarComponent,
+    modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     backgroundColor: Color = ColorConst.Background.PRIMARY,
-    modifier: Modifier = Modifier,
+    floatingActionButton: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
     val state = rememberScaffoldState()
@@ -36,6 +37,7 @@ fun SnackBarHandlerScaffold(
         backgroundColor = backgroundColor,
         snackbarHost = { DefaultSnackBarHost(state = it, type = type) },
         modifier = modifier,
-        content = content
+        content = content,
+        floatingActionButton = floatingActionButton
     )
 }

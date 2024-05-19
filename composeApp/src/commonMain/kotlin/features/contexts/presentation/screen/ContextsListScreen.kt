@@ -3,8 +3,12 @@ package features.contexts.presentation.screen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ContentPasteSearch
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,6 +44,21 @@ fun ContextsListScreen(
     SnackBarHandlerScaffold(
         snackBarComponent = component.snackBarComponent,
         topBar = { TitleAppBar(title = stringResource(Res.string.contexts)) },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = component::onAddClicked,
+                shape = CircleShape,
+                backgroundColor = ColorConst.Colors.ACCENT,
+                content = {
+                    Icon(
+                        imageVector = Icons.Outlined.Add,
+                        contentDescription = null,
+                        tint = ColorConst.Colors.WHITE,
+                        modifier = Modifier.size(SizeConst.IconSize.LPlus),
+                    )
+                }
+            )
+        },
         modifier = Modifier.fillPlatformWidth()
     ) {
         if (state.isLoading) {

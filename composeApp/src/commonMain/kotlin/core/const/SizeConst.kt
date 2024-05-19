@@ -6,6 +6,8 @@ object SizeConst {
     object IconSize {
         val XXXL = 160.dp
         val XXL = 96.dp
+        val XL = 48.dp
+        val LPlus = 36.dp
         val L = 24.dp
         val M = 18.dp
         val MMinus = 16.dp

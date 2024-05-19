@@ -17,7 +17,8 @@ import org.koin.core.component.inject
 
 class ContextsListComponent(
     componentContext: ComponentContext,
-    private val onContextClicked: (ContextLightweight) -> Unit
+    private val onContextClicked: (ContextLightweight) -> Unit,
+    private val onAddClicked: () -> Unit
 ) : BaseCoroutineComponent(componentContext), KoinComponent, ContextChangedListener {
     val state = StateComponent(ContextsListScreenState())
     val snackBarComponent = SnackBarComponent()
@@ -48,6 +49,10 @@ class ContextsListComponent(
                 }
             )
         }
+    }
+
+    fun onAddClicked() {
+        onAddClicked.invoke()
     }
 
     fun onClicked(context: ContextLightweight) {

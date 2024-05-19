@@ -66,7 +66,8 @@ class AuthNavComponentImpl(
                     componentContext = componentContext,
                     listComponent = ContextsListComponent(
                         componentContext = componentContext,
-                        onContextClicked = { contextDetailComponent.setContext(it) }
+                        onContextClicked = { contextDetailComponent.setContext(it) },
+                        onAddClicked = { navigation.push(ChildConfig.Edit(null)) }
                     ),
                     contextDetailComponent = contextDetailComponent
                 )
@@ -76,7 +77,8 @@ class AuthNavComponentImpl(
         ChildConfig.Contexts -> AuthNavComponent.Child.Contexts(
             ContextsListComponent(
                 componentContext = componentContext,
-                onContextClicked = { navigation.push(ChildConfig.ContextDetail(it)) }
+                onContextClicked = { navigation.push(ChildConfig.ContextDetail(it)) },
+                onAddClicked = { navigation.push(ChildConfig.Edit(null)) }
             )
         )
 
