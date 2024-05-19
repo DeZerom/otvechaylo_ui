@@ -126,6 +126,7 @@ class ContextDetailComponent(
             )
         } else {
             answeringUseCase.getAnswerByContext(
+                contextId = stateComponent.state.value.id,
                 context = stateComponent.state.value.context,
                 question = questionComponent.value.value
             )

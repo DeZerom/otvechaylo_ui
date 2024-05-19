@@ -26,5 +26,5 @@ val contextsDiModule = module {
 
     single { AnsweringNetworkSource(client = get(qualifier = AUTH_CLIENT)) }
     single { AnsweringRepository(source = get()) }
-    single { AnsweringUseCase(repository = get()) }
+    single { AnsweringUseCase(repository = get(), contextRepository = get()) }
 }
