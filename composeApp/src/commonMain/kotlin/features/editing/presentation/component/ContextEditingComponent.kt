@@ -10,6 +10,7 @@ import core.utils.text_validators.AlwaysValidValidator
 import core.utils.text_validators.LengthValidator
 import features.contexts.domain.model.ContextSource
 import features.contexts.domain.use_case.ContextUseCase
+import features.editing.presentation.args.ContextEditingArgs
 import features.editing.presentation.callback.ContextChangePayload
 import features.editing.presentation.callback.ContextChangedListenersHolder
 import features.editing.presentation.model.EditingScreenState
@@ -24,7 +25,7 @@ import otvechayloui.composeapp.generated.resources.unknown_error
 
 class ContextEditingComponent(
     componentContext: ComponentContext,
-    private val id: String?,
+    private val args: ContextEditingArgs?,
     private val onBackPressed: () -> Unit
 ): BaseCoroutineComponent(componentContext), KoinComponent {
     val nameComponent = TextInputComponent(LengthValidator.notEmpty())
@@ -62,9 +63,9 @@ class ContextEditingComponent(
 
         stateComponent.reduce { copy(isSaving = true) }
 
-        if (id != null) {
+        if (args?.id != null) {
             contextUseCase.saveChanges(
-                id = id,
+                id = args.id,
                 onlyLocally = onlyLocally,
                 name = nameComponent.value.value,
                 description = descriptionComponent.value.value,
@@ -73,7 +74,7 @@ class ContextEditingComponent(
                 onSuccess = {
                     snackBarComponent.showSuccess(TextResource(Res.string.saved_successfully))
                     ContextChangedListenersHolder.onContextChanged(
-                        id = id,
+                        id = args.id,
                         payload = ContextChangePayload(
                             name = nameComponent.value.value,
                             description = descriptionComponent.value.value,
@@ -116,13 +117,17 @@ class ContextEditingComponent(
             && contextComponent.validate()
 
     private fun getContext() = componentScope.launch {
-        if (id == null) {
+        if (args?.id == null) {
             return@launch
         }
 
         stateComponent.reduce { copy(isLoading = true) }
 
-        contextUseCase.getRich(id).fold(
+        contextUseCase.getRich(
+            id = args.id,
+            source = args.source,
+            hasConflict = args.hasConflict
+        ).fold(
             onSuccess = {
                 nameComponent.onChanged(it.name)
                 descriptionComponent.onChanged(it.description)

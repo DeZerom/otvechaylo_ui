@@ -16,6 +16,7 @@ import features.contexts.domain.use_case.AnsweringUseCase
 import features.contexts.domain.use_case.ContextUseCase
 import features.contexts.presentation.model.AnswerState
 import features.contexts.presentation.model.ContextDetailScreenState
+import features.editing.presentation.args.ContextEditingArgs
 import features.editing.presentation.callback.ContextChangePayload
 import features.editing.presentation.callback.ContextChangedListener
 import features.editing.presentation.callback.ContextChangedListenersHolder
@@ -31,7 +32,7 @@ import otvechayloui.composeapp.generated.resources.unknown_error
 class ContextDetailComponent(
     componentContext: ComponentContext,
     private val onBackPressed: () -> Unit,
-    private val onEditPressed: (String) -> Unit
+    private val onEditPressed: (ContextEditingArgs) -> Unit
 ): BaseCoroutineComponent(componentContext), KoinComponent, ContextChangedListener {
     val questionComponent = TextInputComponent(LengthValidator.notEmpty())
     val stateComponent = StateComponent(ContextDetailScreenState())
@@ -40,7 +41,9 @@ class ContextDetailComponent(
     private val contextUseCase: ContextUseCase by inject()
     private val answeringUseCase: AnsweringUseCase by inject()
 
-    private var hasNetworkSource = false
+    private var hasConflict = false
+    private var source = ContextSource.NETWORK
+    private val hasNetworkSource get() = source == ContextSource.NETWORK || source == ContextSource.BOTH
 
     init {
         ContextChangedListenersHolder.register(this)
@@ -65,14 +68,14 @@ class ContextDetailComponent(
     }
 
     fun setContext(context: ContextLightweight) {
-        hasNetworkSource = context.source == ContextSource.NETWORK || context.source == ContextSource.DB
+        source = context.source
+        hasConflict = context.hasConflict
 
         stateComponent.setState(
             ContextDetailScreenState(
                 id = context.id,
                 name = context.name,
-                description = context.description,
-                isFullyLoaded = context.source == ContextSource.DB || context.source == ContextSource.BOTH
+                description = context.description
             )
         )
     }
@@ -87,14 +90,19 @@ class ContextDetailComponent(
     fun onShowHideClicked() {
         if (stateComponent.state.value.isShown) {
             stateComponent.reduce { copy(isShown = false) }
-            hasNetworkSource = false
         } else {
             showContext()
         }
     }
 
     fun onEditPressed() {
-        onEditPressed(stateComponent.state.value.id)
+        onEditPressed(
+            ContextEditingArgs(
+                id = stateComponent.state.value.id,
+                source = source,
+                hasConflict = hasConflict
+            )
+        )
     }
 
     @OptIn(ExperimentalResourceApi::class)
@@ -154,7 +162,11 @@ class ContextDetailComponent(
     private fun downloadRichContext() = componentScope.launch {
         stateComponent.reduce { copy(isContextLoading = true) }
 
-        contextUseCase.getRich(stateComponent.state.value.id).fold(
+        contextUseCase.getRich(
+            id = stateComponent.state.value.id,
+            source = source,
+            hasConflict = hasConflict
+        ).fold(
             onSuccess = {
                 stateComponent.reduce {
                     copy(

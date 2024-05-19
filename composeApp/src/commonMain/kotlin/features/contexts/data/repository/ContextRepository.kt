@@ -28,8 +28,12 @@ class ContextRepository(
         return Result.success(merge(network, local))
     }
 
-    suspend fun getRich(id: String): Result<ContextRich> {
-        return networkSource.getRich(id).map { it.toDomain(ContextSource.NETWORK) }
+    suspend fun getRich(id: String, useLocalBd: Boolean, source: ContextSource): Result<ContextRich> {
+        return if (useLocalBd) {
+            Result.success(dbSource.getById(id).toDomain(source = source))
+        } else {
+            networkSource.getRich(id).map { it.toDomain(source = source) }
+        }
     }
 
     suspend fun saveChanges(

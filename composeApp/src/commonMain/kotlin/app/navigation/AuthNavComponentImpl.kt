@@ -11,6 +11,7 @@ import features.contexts.domain.model.ContextLightweight
 import features.contexts.presentation.component.ContextDetailComponent
 import features.contexts.presentation.component.ContextScreenManagerComponent
 import features.contexts.presentation.component.ContextsListComponent
+import features.editing.presentation.args.ContextEditingArgs
 import features.editing.presentation.component.ContextEditingComponent
 import kotlinx.serialization.Serializable
 
@@ -93,7 +94,7 @@ class AuthNavComponentImpl(
         is ChildConfig.Edit -> AuthNavComponent.Child.Edit(
             ContextEditingComponent(
                 componentContext = componentContext,
-                id = config.id,
+                args = config.args,
                 onBackPressed = { navigation.pop() }
             )
         )
@@ -117,6 +118,6 @@ class AuthNavComponentImpl(
         data class ContextDetail(val context: ContextLightweight): ChildConfig
 
         @Serializable
-        data class Edit(val id: String?): ChildConfig
+        data class Edit(val args: ContextEditingArgs?): ChildConfig
     }
 }
