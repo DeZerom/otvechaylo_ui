@@ -5,9 +5,18 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlin.serializable)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
+    sqldelight {
+        databases {
+            create("Db") {
+                packageName.set("ru.dezerom")
+            }
+        }
+    }
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -24,18 +33,11 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-
-            // logic + nav
             implementation(libs.decompose)
-
-            // di
             implementation(libs.koin.android)
-
-            // network
             implementation(libs.ktor.client.okhttp)
-
-            // async
             implementation(libs.kotlin.coroutines.android)
+            implementation(libs.sqldelight.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -62,6 +64,7 @@ kotlin {
 
             // persistence
             implementation(libs.multiplatform.setting)
+            implementation(libs.sqldelight.coroutines.extension)
 
             // async
             implementation(libs.kotlin.coroutines.core)
@@ -73,6 +76,7 @@ kotlin {
             implementation(libs.slf4j.api)
             implementation(libs.slf4j.logger)
             implementation(libs.kotlin.coroutines.swing)
+            implementation(libs.sqldelight.jvm)
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.compose.ui.window.rememberWindowState
 import app.App
 import app.config.AppConfig
 import app.config.LocalAppConfig
+import app.di.dbDiModule
 import app.navigation.AuthNavComponentImpl
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
@@ -28,7 +29,7 @@ fun main() {
     val lifecycle = LifecycleRegistry()
 
     startKoin {
-        modules(authDiModule, contextsDiModule)
+        modules(dbDiModule, authDiModule, contextsDiModule)
     }
 
     val root = runOnUiThread {

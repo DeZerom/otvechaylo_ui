@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS Context (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    context TEXT,
+    hash TEXT
+);
+
+getAll:
+SELECT * FROM Context;
+
+getById:
+SELECT * FROM Context
+WHERE :id = Context.id;
+
+insert:
+INSERT OR REPLACE INTO Context(id, name, description, context, hash)
+VALUES (?, ?, ?, ?, ?);
