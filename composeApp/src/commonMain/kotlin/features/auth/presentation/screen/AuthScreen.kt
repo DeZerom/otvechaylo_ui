@@ -2,7 +2,16 @@ package features.auth.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,7 +31,12 @@ import features.auth.presentation.component.AuthComponent
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import otvechayloui.composeapp.generated.resources.*
+import otvechayloui.composeapp.generated.resources.Res
+import otvechayloui.composeapp.generated.resources.app_icon
+import otvechayloui.composeapp.generated.resources.authorization
+import otvechayloui.composeapp.generated.resources.create_account
+import otvechayloui.composeapp.generated.resources.enter
+import otvechayloui.composeapp.generated.resources.login
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -45,6 +59,7 @@ fun AuthScreen(
                 modifier = Modifier
                     .padding(horizontal = SizeConst.Padding.M)
                     .fillMaxHeight()
+                    .fillPlatformWidth()
             ) {
                 Image(
                     painter = painterResource(Res.drawable.app_icon),
@@ -61,11 +76,13 @@ fun AuthScreen(
                     value = component.loginComponent.value.collectAsState().value,
                     onValueChange = component.loginComponent::onChanged,
                     labelText = stringResource(Res.string.login),
+                    modifier = Modifier.fillPlatformWidth()
                 )
                 VerticalSpacer(SizeConst.Padding.M)
                 PasswordTextField(
                     value = component.passwordComponent.value.collectAsState().value,
-                    onValueChanged = component.passwordComponent::onChanged
+                    onValueChanged = component.passwordComponent::onChanged,
+                    modifier = Modifier.fillPlatformWidth()
                 )
                 VerticalSpacer(SizeConst.Padding.XS)
                 Text(
