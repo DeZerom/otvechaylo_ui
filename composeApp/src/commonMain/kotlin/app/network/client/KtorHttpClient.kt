@@ -10,8 +10,8 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import org.koin.core.qualifier.StringQualifier
 
-private const val BASE_URL_LOCAL = "http://127.0.0.1:8080"
-private const val BASE_URL_NETWORK = "http://91.146.12.163:8080"
+private const val BASE_URL = "http://127.0.0.1:8080"
+//private const val BASE_URL = "http://91.146.12.163:8080"
 private const val AUTH_HEADER = "AuthTokenHeader"
 
 val DEFAULT_CLIENT = StringQualifier("default_client")
@@ -24,7 +24,7 @@ fun buildClient() = HttpClient {
         level = LogLevel.HEADERS
     }
     defaultRequest {
-        url(BASE_URL_NETWORK)
+        url(BASE_URL)
         contentType(ContentType.Application.Json)
     }
 }
@@ -40,7 +40,7 @@ fun buildAuthClient(authSource: AuthSettingsSource) = HttpClient {
         socketTimeoutMillis = 60000
     }
     defaultRequest {
-        url(BASE_URL_NETWORK)
+        url(BASE_URL)
         contentType(ContentType.Application.Json)
         header(
             key = AUTH_HEADER,

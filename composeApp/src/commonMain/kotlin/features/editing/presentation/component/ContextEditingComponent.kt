@@ -35,6 +35,8 @@ class ContextEditingComponent(
     val snackBarComponent = SnackBarComponent()
     val stateComponent = StateComponent(EditingScreenState())
 
+    val isEditing get() = args != null
+
     private val contextUseCase: ContextUseCase by inject()
 
     init {

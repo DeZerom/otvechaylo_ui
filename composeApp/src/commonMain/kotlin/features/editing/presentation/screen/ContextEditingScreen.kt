@@ -33,7 +33,7 @@ fun ContextEditingScreen(
     SnackBarHandlerScaffold(
         topBar = {
             BackAppBar(
-                title = stringResource(Res.string.editing),
+                title = stringResource(if (component.isEditing) Res.string.editing else Res.string.creation),
                 onBackPressed = component::onBackPressed
             )
         },

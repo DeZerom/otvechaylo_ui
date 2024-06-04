@@ -11,6 +11,7 @@ import app.navigation.AuthNavComponentImpl
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import features.auth.data.sources.AuthSettingsSource
 import features.auth.di.authDiModule
 import features.contexts.di.contextsDiModule
 import io.kanro.compose.jetbrains.expui.theme.DarkTheme
@@ -31,6 +32,8 @@ fun main() {
     startKoin {
         modules(dbDiModule, authDiModule, contextsDiModule)
     }
+
+    clearData()
 
     val root = runOnUiThread {
         AuthNavComponentImpl(DefaultComponentContext(lifecycle = lifecycle))
@@ -56,4 +59,8 @@ fun main() {
             }
         }
     }
+}
+
+private fun clearData() {
+    AuthSettingsSource().clearToken()
 }

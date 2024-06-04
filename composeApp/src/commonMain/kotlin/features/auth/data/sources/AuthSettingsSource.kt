@@ -12,6 +12,8 @@ class AuthSettingsSource {
 
     fun getToken(): String? = settings[TOKEN_KEY]
 
+    fun clearToken() = settings.clear()
+
     companion object {
         const val TOKEN_KEY = "token_key"
     }
